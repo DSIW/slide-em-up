@@ -4,7 +4,7 @@ require "yajl"
 
 module SlideEmUp
   class Presentation
-    Meta    = Struct.new(:title, :dir, :css, :js, :author, :duration)
+    Meta    = Struct.new(:title, :dir, :css, :js, :author, :duration, :pygments_style)
     Theme   = Struct.new(:title, :dir, :css, :js)
     Section = Struct.new(:number, :title, :dir, :slides)
 
@@ -20,8 +20,8 @@ module SlideEmUp
 
     def initialize(dir)
       infos   = extract_normal_infos(dir) || extract_infos_from_showoff(dir) || {}
-      infos   = { "title" => "No title", "theme" => "shower", "duration" => 60 }.merge(infos)
-      @meta   = build_meta(infos["title"], dir, infos["author"], infos["duration"])
+      infos   = { "title" => "No title", "theme" => "shower", "duration" => 60, "pygments_style" => "colorful" }.merge(infos)
+      @meta   = build_meta(infos["title"], dir, infos["author"], infos["duration"], infos["pygments_style"])
       @theme  = build_theme(infos["theme"])
       @common = build_theme("common")
       @parts  = infos["sections"] || raise(Exception, "check your presentation.json or showoff.json file")
@@ -63,7 +63,7 @@ module SlideEmUp
       { "title" => infos["name"], "theme" => "showoff", "sections" => sections }
     end
 
-    def build_meta(title, dir, author, duration)
+    def build_meta(title, dir, author, duration, pygments_style)
       Meta.new.tap do |m|
         m.title = title
         m.dir   = dir
@@ -73,6 +73,7 @@ module SlideEmUp
         end
         m.author = author
         m.duration = duration
+        m.pygments_style = pygments_style
       end
     end
 

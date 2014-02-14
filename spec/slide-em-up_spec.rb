@@ -25,6 +25,10 @@ describe SlideEmUp do
       @presentation.theme.title.must_equal "3d_slideshow"
     end
 
+    it "has a pygments style" do
+      @presentation.meta.pygments_style.must_equal "colorful"
+    end
+
     it "has 3 sections, each one with a title" do
       @presentation.parts.keys.length.must_equal 3
       expected = { "one" => "one", "two" => "two", "three" => "three" }
