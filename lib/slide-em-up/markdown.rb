@@ -9,9 +9,14 @@ module SlideEmUp
       :no_intra_emphasis  => true,
       :tables             => true,
       :fenced_code_blocks => true,
+      :disable_indented_code_blocks => true,
       :autolink           => true,
       :strikethrough      => true,
-      :superscript        => true
+      :superscript        => true,
+      :quote              => true,
+      :underline          => true,
+      :lax_spacing        => true,
+      :highlight          => true
     }
 
     def self.render(text)
