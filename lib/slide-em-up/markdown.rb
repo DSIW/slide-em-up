@@ -65,6 +65,10 @@ module SlideEmUp
       "<pre><code class=\"#{lang}\">#{colorized}</code></pre>"
     end
 
+    def table(header, body)
+      %{<table class="striped"><thead>#{header}</thead><tbody>#{body}</tbody></table>}
+    end
+
     def strikethrough(text)
       "<s>#{text}</s>"
     end
