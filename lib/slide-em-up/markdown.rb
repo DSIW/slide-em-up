@@ -20,6 +20,46 @@ module SlideEmUp
       markdown.render(text)
     end
 
+    def preprocess(text)
+      parse_flickr_image(text)
+      text
+    end
+
+    def parse_flickr_image(text)
+      text.gsub!(/!F\[(.+?)\](?:\[(.+?)\])?/) do
+        id = $1
+        size = $2 || :b
+        flickr_image = FlickrImage.new(id)
+        src = flickr_image.image_src #(size)
+        author = flickr_image.author
+        license = flickr_image.license["name"]
+        license_url = flickr_image.license["url"]
+        cc_attributes = flickr_image.license["cc_attributes"]
+        alt = flickr_image.title
+        page = flickr_image.page
+        if src.include? "flickr"
+          html = "<figure>"
+          html << %{<img alt="#{alt}" src="#{src}"/>}
+          html << "<figcaption>"
+          html << %{<img src="../images/flickr.svg" class="flickr" />}
+          html << %{<a href="#{page}" alt="#{author} on Flickr">#{author}</a>}
+          html << %{<a href="#{license_url}" alt="#{license}">}
+          if cc_attributes.any?
+            html << %{<span class="license license-cc"></span>}
+            #cc_attributes.each do |cc|
+              #html << %{<span class="license license-#{cc}"></span>}
+            #end
+          end
+          html << %{</a>}
+          html << "</figcaption>"
+          html << "</figure>"
+          html
+        else
+          %{<img alt="#{alt}" src="#{src}"/>}
+        end
+      end
+    end
+
     def block_code(code, lang)
       colorized = Pygments.highlight(code, :lexer => lang || "text", :options => {:nowrap => true})
       "<pre><code class=\"#{lang}\">#{colorized}</code></pre>"
