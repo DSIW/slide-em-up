@@ -28,6 +28,7 @@ module SlideEmUp
     def preprocess(text)
       parse_highlight(text)
       parse_box(text)
+      parse_colorizing(text)
       parse_flickr_image(text)
       text
     end
@@ -41,6 +42,12 @@ module SlideEmUp
     def parse_highlight(text)
       text.gsub!(/(==)(.*?)\1(.*?)\1/) do
         %{<mark class="#{$2}">#{$3}</mark>}
+      end
+    end
+
+    def parse_colorizing(text)
+      text.gsub!(/(__)(.*?)\1(.*?)\1/) do
+        %{<span class="text-#{$2}">#{$3}</span>}
       end
     end
 
