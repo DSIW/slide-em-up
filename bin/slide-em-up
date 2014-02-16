@@ -76,15 +76,13 @@ end
 
 desc 'Generate static version of presentation'
 long_desc 'Creates a static version of the presentation in "static" directory'
-arg_name 'static_dir'
 command [:static] do |c|
   c.desc 'Port on which to run'
   c.default_value SlideEmUp::Server::DEFAULT_PORT
   c.flag [:p,:port]
 
   c.action do |global_options,options,args|
-    raise "static_dir is required" if args.empty?
-    SlideEmUp::Utils.generate_static(args[0], options)
+    SlideEmUp::Utils.generate_static(options)
   end
 end
 

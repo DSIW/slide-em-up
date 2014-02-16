@@ -48,7 +48,7 @@ module SlideEmUp
 
     # Source: https://github.com/puppetlabs/showoff/blob/master/lib/showoff_utils.rb#L100
     def github
-      generate_static(nil)
+      generate_static
       `git add static`
       sha = `git write-tree`.chomp
       tree_sha = `git rev-parse #{sha}:static`.chomp
@@ -59,11 +59,12 @@ module SlideEmUp
       `git update-ref refs/heads/gh-pages #{commit_sha}`
     end
 
-    def generate_static(dir = "static", options = {})
+    def generate_static(options = {})
       pid = Process.fork { SlideEmUp::Server.new(options).start }
 
       sleep 2
 
+      dir = "static"
       FileUtils.mkdir_p(dir)
       Dir.chdir(dir) do |dir|
         `wget -E -H -k -nH -p http://lh:#{options[:port]}/`
@@ -74,7 +75,7 @@ module SlideEmUp
     end
 
     def serve_static(port)
-      `python3 -m http.server #{options[:port]}`
+      `python3 -m http.server #{port}`
     end
   end
 end
