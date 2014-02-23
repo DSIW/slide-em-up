@@ -202,9 +202,11 @@ This is ==orange==some== __orange__super__ and _underlined_ text.
           file.write <<-EOF
 {
   "title": "#{name}",
-  "theme": "shower",
-  "pygments_style": "colorful",
+  "author": "Me",
+  "theme": "modern",
+  "pygments_style": "github",
   //"duration": 20,
+  //"flickr_api_key": "...",
   "sections": {
     "main":"Talk 2.0"
   }
