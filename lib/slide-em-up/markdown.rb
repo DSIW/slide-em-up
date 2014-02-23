@@ -29,6 +29,7 @@ module SlideEmUp
       parse_highlight(text)
       parse_box(text)
       parse_colorizing(text)
+      parse_description(text)
       parse_flickr_image(text)
       text
     end
@@ -48,6 +49,16 @@ module SlideEmUp
     def parse_colorizing(text)
       text.gsub!(/(__)(.*?)\1(.*?)\1/) do
         %{<span class="text-#{$2}">#{$3}</span>}
+      end
+    end
+
+    def parse_description(text)
+      item = /([^\n]+?)\n/
+      separator = /\s*:\s+/
+      text.gsub!(/(#{item}#{separator}#{item})+/m) do |m|
+        scanned = m.scan(/#{item}#{separator}#{item}/m)
+        html_list = scanned.map { |(word, desc)| %{<dt>#{word}</dt><dd>#{desc}</dd>} }.join
+        %Q{<dl>#{html_list}</dl>}
       end
     end
 
