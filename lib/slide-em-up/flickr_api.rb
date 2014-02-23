@@ -4,6 +4,20 @@ require 'net/http'
 require 'json'
 
 module SlideEmUp
+  class FlickrAPIException < Exception
+    def initialize(code, message)
+      @code = code
+      @message = message
+    end
+
+    def self.from_json(json)
+      new(json['code'], json['message'])
+    end
+
+    def to_s
+      "#{@message} [Code: #{@code}]"
+    end
+  end
   class FlickrAPI
     ENDPOINT = "http://api.flickr.com/services/rest/"
 
@@ -25,7 +39,11 @@ module SlideEmUp
     end
 
     def json
-      @json ||= JSON.parse(Net::HTTP.get(uri))
+      @json ||= begin
+        _json = JSON.parse(Net::HTTP.get(uri))
+        raise FlickrAPIException.from_json(_json) unless _json['stat'] == 'ok'
+        _json
+      end
     end
   end
 end
