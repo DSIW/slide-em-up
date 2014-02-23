@@ -1,57 +1,34 @@
-Slide'em up
-===========
+# Showoff
 
 Slide'em up is a presentation tool. You write some slides in markdown, choose
 a style and it displays it in HTML5. With a browser in full-screen, you can
 make amazing presentations!
 
-Requirements
-------------
+## Requirements
 
 * Ruby 1.9.3 or higher
 * Sass for themes with sass files
-* python3 for serving static presentation
-* wget for static site generation
+* CoffeeScript for themes with coffee files
+* Python3 for serving static presentation
+* Wget for static site generation
+* Pygments for syntax highlighting
 * Browser for viewing presentation
 
 
-How to do your first presentation with Slide'em up?
----------------------------------------------------
+## How to do your first presentation with Slide'em up?
 
 1. Install Slideoff: `gem install slideoff`
-2. Create a directory for your presentation: `mkdir foobar && cd foobar`
-3. Create a section for your slides: `mkdir main`
-4. Write some slides: `vim main/slides.md`
+1. Initialize your presentation under `test` directory: `slideoff init test`
+1. Edit `presentation.json` and add your Flickr API key.
+1. Edit `main/slides.md`
+1. Serve your presentation: `slideoff serve`
+1. Open your browser on http://localhost:9000/
+1. Use the arrows keys to navigate between slides
 
-       !SLIDE
-       # My First slide #
-       It's awesome
-
-       !SLIDE
-       # My second slide #
-       This rocks too!
-
-5. Write the `presentation.json` file with the metadata:
-
-       {
-         "title": "My first presentation",
-         "theme": "CSSS",
-         "duration": 20,
-         "sections": {
-             "main": "Title of my main section"
-         }
-       }
-
-6. Launch the tool: `slideoff serve`
-7. Open your browser on http://localhost:9000/
-8. Use the arrows keys to navigate between the slides
-
-
-Themes
-------
+## Themes
 
 Several themes are available: `io2012`, `shower`, `3d_slideshow`, `reveal`,
-`html5rocks`, `CSSS` and `memories`. To choose the theme for your
+`html5rocks`, `CSSS`, `memories` and `modern`. To choose the theme for your
 presentation, edit the `presentation.json` file and change the `"theme"`
 element.
 
@@ -64,8 +41,7 @@ $EDITOR ~/.slideoff/my-theme/README
 ```
 
 
-Markup for the slides
----------------------
+## Markup for the slides
 
 This slides are writen in [Markdown](http://daringfireball.net/projects/markdown/syntax)
 and `!SLIDE` is the indicator for a new slide.
@@ -91,9 +67,10 @@ Example:
     2. _italics_
     3. https://github.com/
 
+Many more additional elements are added. See `main/slides.md` to get an example.
 
-Syntax Highlighting
--------------------
+
+## Syntax Highlighting
 
 To highlight some code in your slides, you have to install
 [pygments](http://pygments.org/). Then, surround your code with backticks
@@ -108,48 +85,13 @@ like this:
     ```
 
 
-Remote Control
---------------
-
-When your start slideoff in console, a message says something like:
-
-> Your remote key is 652df
-
-This remote key can be used to send actions to browsers that display the
-presentation. For example, this command goes to the next line:
-
-    curl http://localhost:9000/remote/652df/next
-
-The last part of the URL is the action and can be `next`, `prev`, `up` or
-`down`.
-
-It's also possible to force slideoff to use a specific remote key by
-setting the `APIKEY` environment variable:
-
-    APIKEY=foobar slideoff
-
-
-Export to PDF
--------------
+## Export to PDF
 
 You can export your presentation to PDF by installing
 [phantomjs](http://phantomjs.org/) and then run `slideoff2pdf`.
 
 
-Examples
---------
-
-I'm using slideoff for my own presentations, so you can find some real
-slides powered by slideoff on https://github.com/nono/Presentations.
-
-For example, you can try the presentation "Welcome to the nice world of Golang"
-on http://blog.menfin.info/Presentations/20120709_Golang_introduction/ and
-see the sources of it on
-https://github.com/nono/Presentations/tree/master/20120709_Golang_introduction.
-
-
-Issues or Suggestions
----------------------
+## Issues or Suggestions
 
 Found an issue or have a suggestion? Please report it on
 [Github's issue tracker](http://github.com/DSIW/slideoff/issues).
@@ -159,12 +101,11 @@ If you wants to make a pull request, please check the specs before:
     bundle exec spec/slideoff_spec.rb
 
 
-Credits
--------
+## Credits
 
+Bruno Michel is the guy who made [Slide'em up](https://github.com/nono/slide-em-up).
 Scott Chacon is the guy who made [ShowOff](https://github.com/schacon/showoff).
-Slide'em up is only a copy of ShowOff with multiple themes and sinatra
-replaced by Goliath.
+Slideoff is based on Slide'em up and Showoff.
 
 Themes were picked from the internet. Thanks to:
 
@@ -174,5 +115,5 @@ Themes were picked from the internet. Thanks to:
 - Lea Verou for CSSS (and its modified version, memories)
 - Google for io2012
 
-♡2011 by Bruno Michel. Copying is an act of love. Please copy and share.
+♡2014 by DSIW. Copying is an act of love. Please copy and share.
 Released under the MIT license

@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.license          = 'MIT'
   s.extra_rdoc_files = %w(README.md)
   s.files            = Dir["MIT-LICENSE", "README.md", "Gemfile", "bin/*", "lib/**/*.rb", "themes/**/*"]
-  s.executables      = ["slideoff", "slideoffpdf"]
+  s.executables      = ["slideoff", "slideoff2pdf"]
   s.require_paths    = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.add_dependency "goliath", "=1.0.2"
