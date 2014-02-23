@@ -31,6 +31,7 @@ module SlideEmUp
       parse_colorizing(text)
       parse_description(text)
       parse_flickr_image(text)
+      parse_pause(text)
       text
     end
 
@@ -95,6 +96,10 @@ module SlideEmUp
           %{<img alt="#{alt}" src="#{src}"/>}
         end
       end
+    end
+
+    def parse_pause(text)
+      text.gsub!(/^!PAUSE\s*$/) { %{<p class="pause"></p>} }
     end
 
     def block_code(code, lang)
