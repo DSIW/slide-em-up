@@ -1,6 +1,6 @@
 # Showoff
 
-Slide'em up is a presentation tool. You write some slides in markdown, choose
+Showoff is a presentation tool. You write some slides in markdown, choose
 a style and it displays it in HTML5. With a browser in full-screen, you can
 make amazing presentations!
 
