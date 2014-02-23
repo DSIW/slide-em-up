@@ -35,7 +35,7 @@ module SlideEmUp
     end
 
     def parse_box(text)
-      text.gsub!(/(\+\+\+)(.*?)\1\n\1(.+?)\1\n\1(.+?)\1/m) do
+      text.gsub!(/(\+\+\+)(.*?)\n\1(.+?)\n\1(.+?)(\n|$)/m) do
         %{<div class="box #{$2}"><p>#{$3}</p><p>#{$4}</p></div>}
       end
     end
