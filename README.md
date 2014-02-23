@@ -5,6 +5,15 @@ Slide'em up is a presentation tool. You write some slides in markdown, choose
 a style and it displays it in HTML5. With a browser in full-screen, you can
 make amazing presentations!
 
+Requirements
+------------
+
+* Ruby 1.9.3 or higher
+* Sass for themes with sass files
+* python3 for serving static presentation
+* wget for static site generation
+* Browser for viewing presentation
+
 
 How to do your first presentation with Slide'em up?
 ---------------------------------------------------
