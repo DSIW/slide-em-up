@@ -1,17 +1,17 @@
 require "rack/builder"
 
 
-module SlideEmUp
+module Slideoff
   class Routes
 
     def self.run(presentation, opts = {})
       Rack::Builder.new do
         map '/remote' do
-          run SlideEmUp::RemoteAPI.new(opts[:remote_key])
+          run Slideoff::RemoteAPI.new(opts[:remote_key])
         end
 
         map '/' do
-          run SlideEmUp::SlidesAPI.new(presentation)
+          run Slideoff::SlidesAPI.new(presentation)
         end
       end
     end

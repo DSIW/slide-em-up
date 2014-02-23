@@ -1,18 +1,18 @@
 #!/usr/bin/env ruby
 
 require "minitest/autorun"
-require "slide-em-up"
+require "slideoff"
 
 
-describe SlideEmUp do
+describe Slideoff do
   before do
     dir = File.expand_path("../example", __FILE__)
-    @presentation = SlideEmUp::Presentation.new(dir)
+    @presentation = Slideoff::Presentation.new(dir)
   end
 
 
   it "has a version number" do
-    SlideEmUp::VERSION.must_match /\d+\.\d+\.\d+/
+    Slideoff::VERSION.must_match /\d+\.\d+\.\d+/
   end
 
 
@@ -82,7 +82,7 @@ describe SlideEmUp do
     it 'raise error with nither presentation.json or showoff.json file' do
       proc {
         space_dir = File.expand_path("../example1/", __FILE__)
-        @presentation = SlideEmUp::Presentation.new(space_dir)
+        @presentation = Slideoff::Presentation.new(space_dir)
       }.must_raise Exception
     end
   end

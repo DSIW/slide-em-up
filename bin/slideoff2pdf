@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 require 'tmpdir'
-require "slide-em-up"
+require "slideoff"
 require "goliath/runner"
 
 
@@ -12,12 +12,12 @@ output = ARGV.first || "slides.pdf"
 delay = 500
 url = "http://localhost:9000/"
 viewport = { width: 1024, height: 768 }
-presentation = SlideEmUp::Presentation.new(Dir.pwd)
+presentation = Slideoff::Presentation.new(Dir.pwd)
 
-# Run a slide-em-up instance in background
+# Run a slideoff instance in background
 pid = Process.fork do
   runner = Goliath::Runner.new([], nil)
-  runner.app = SlideEmUp::Routes.run(presentation)
+  runner.app = Slideoff::Routes.run(presentation)
   runner.run
 end
 

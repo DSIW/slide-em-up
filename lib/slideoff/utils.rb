@@ -1,6 +1,6 @@
 require "fileutils"
 
-module SlideEmUp
+module Slideoff
   module Utils
     module_function
 
@@ -218,7 +218,7 @@ This is ==orange==some== __orange__super__ and _underlined_ text.
     end
 
     def install_theme(git_repository_url)
-      theme_directory = File.join(ENV['HOME'], '.slide-em-up')
+      theme_directory = File.join(ENV['HOME'], '.slideoff')
       FileUtils.mkdir_p theme_directory
       theme_name = git_repository_url.split('/').last
       theme_path = File.join(theme_directory, theme_name)
@@ -242,7 +242,7 @@ This is ==orange==some== __orange__super__ and _underlined_ text.
     end
 
     def generate_static(options = {})
-      pid = Process.fork { SlideEmUp::Server.new(options).start }
+      pid = Process.fork { Slideoff::Server.new(options).start }
 
       sleep 2
 

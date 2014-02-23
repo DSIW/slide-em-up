@@ -3,7 +3,7 @@
 require 'net/http'
 require 'json'
 
-module SlideEmUp
+module Slideoff
   class FlickrAPIException < Exception
     def initialize(code, message)
       @code = code

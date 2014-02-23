@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-module SlideEmUp
+module Slideoff
   class FlickrImage
     def initialize(id)
       @id = id

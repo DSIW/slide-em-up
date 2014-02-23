@@ -1,7 +1,7 @@
 require "goliath/api"
 
 
-module SlideEmUp
+module Slideoff
   class RemoteAPI < Goliath::API
     def initialize(key)
       # Secret token...

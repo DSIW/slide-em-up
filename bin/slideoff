@@ -3,44 +3,44 @@
 require 'rubygems'
 require 'gli'
 
-require "slide-em-up"
+require "slideoff"
 
 include GLI::App
 
-version "0.3.5" # SlideEmUp::VERSION
+version "0.3.5" # Slideoff::VERSION
 
 
-desc 'Create new slide-em-up presentation'
+desc 'Create new slideoff presentation'
 arg_name 'dir_name'
-long_desc 'This command helps start a new slide-em-up presentation by setting up the proper directory structure for you.  It takes the directory name you would like slide-em-up to create for you.'
+long_desc 'This command helps start a new slideoff presentation by setting up the proper directory structure for you.  It takes the directory name you would like slideoff to create for you.'
 command [:init] do |c|
 
   c.action do |global_options,options,args|
     raise "dir_name is required" if args.empty?
-    SlideEmUp::Utils.init_directory(args[0])
-    puts "Done. Run 'slide-em-up serve' in #{args[0]}/ dir to see slideshow"
+    Slideoff::Utils.init_directory(args[0])
+    puts "Done. Run 'slideoff serve' in #{args[0]}/ dir to see slideshow"
   end
 end
 
 
-desc 'Install new slide-em-up theme'
+desc 'Install new slideoff theme'
 arg_name 'repository_url'
-long_desc 'Installs theme under ~/.slide-em-up.'
+long_desc 'Installs theme under ~/.slideoff.'
 command [:install_theme] do |c|
   c.action do |global_options,options,args|
     raise "repository_url is required" if args.empty?
-    SlideEmUp::Utils.install_theme(args[0])
+    Slideoff::Utils.install_theme(args[0])
     puts "Done."
   end
 end
 
 
-desc 'Puts your slide-em-up presentation into a gh-pages branch'
+desc 'Puts your slideoff presentation into a gh-pages branch'
 long_desc 'Generates a static version of your presentation into your gh-pages branch for publishing to GitHub Pages'
 command :github do |c|
   c.action do |global_options,options,args|
     puts "Generating static content"
-    SlideEmUp::Utils.github
+    Slideoff::Utils.github
     puts "I've updated your 'gh-pages' branch with the static version of your presentation."
     puts "Push it to GitHub to publish it. Probably something like:"
     puts
@@ -50,24 +50,24 @@ command :github do |c|
 end
 
 
-desc 'Serves the slide-em-up presentation in the current directory'
+desc 'Serves the slideoff presentation in the current directory'
 command :serve do |c|
   c.desc 'Show verbose messaging'
   c.switch :verbose
 
   c.desc 'Port on which to run'
-  c.default_value SlideEmUp::Server::DEFAULT_PORT
+  c.default_value Slideoff::Server::DEFAULT_PORT
   c.flag [:p,:port]
 
   c.desc 'Host or ip to run on'
-  c.default_value SlideEmUp::Server::DEFAULT_ADDRESS
+  c.default_value Slideoff::Server::DEFAULT_ADDRESS
   c.flag [:h,:host]
 
   c.desc 'API key for remote access'
   c.flag [:remote_key]
 
   c.action do |global_options,options,args|
-    server = SlideEmUp::Server.new(options).start
+    server = Slideoff::Server.new(options).start
     puts "Your remote key is #{server.remote_key}\n\n"
     server.start
   end
@@ -78,11 +78,11 @@ desc 'Generate static version of presentation'
 long_desc 'Creates a static version of the presentation in "static" directory'
 command [:static] do |c|
   c.desc 'Port on which to run'
-  c.default_value SlideEmUp::Server::DEFAULT_PORT
+  c.default_value Slideoff::Server::DEFAULT_PORT
   c.flag [:p,:port]
 
   c.action do |global_options,options,args|
-    SlideEmUp::Utils.generate_static(options)
+    Slideoff::Utils.generate_static(options)
   end
 end
 
@@ -97,7 +97,7 @@ command [:serve_static] do |c|
   c.action do |global_options,options,args|
     Dir.chdir("static") do |dir|
       puts "Listening python server on http://0.0.0.0:#{options[:port]}"
-      SlideEmUp::Utils.serve_static(options[:port])
+      Slideoff::Utils.serve_static(options[:port])
     end
   end
 end

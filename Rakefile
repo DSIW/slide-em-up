@@ -6,7 +6,7 @@ end
 
 desc "Builds the gem"
 task :gem do
-  Gem::Builder.new(eval(File.read('slide-em-up.gemspec'))).build
+  Gem::Builder.new(eval(File.read('slideoff.gemspec'))).build
 end
 
 task :default => :test

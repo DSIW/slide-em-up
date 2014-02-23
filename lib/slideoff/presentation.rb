@@ -2,7 +2,7 @@ require "erubis"
 require "yajl"
 
 
-module SlideEmUp
+module Slideoff
   class Presentation
     Meta    = Struct.new(:title, :dir, :css, :js, :author, :duration, :pygments_style, :flickr_api_key)
     Theme   = Struct.new(:title, :dir, :css, :js)
@@ -34,10 +34,18 @@ module SlideEmUp
     end
 
     def path_for_asset(asset)
+      [meta, theme, common].each { |dir| convert_styles(dir) }
+
       Dir[     "#{meta.dir}#{asset}"].first ||
         Dir[  "#{theme.dir}#{asset}"].first ||
         Dir[ "#{common.dir}#{asset}"].first ||
         Dir["#{meta.dir}/**#{asset}"].first
+    end
+
+    def convert_styles(dir)
+      if Dir.exist?("#{dir}/styles") && !Dir.exist?("#{dir}/css")
+        Dir.chdir(dir) { `sass --update styles:css` }
+      end
     end
 
     def nb_slides
@@ -80,7 +88,7 @@ module SlideEmUp
 
     def build_theme(title)
       Theme.new.tap do |t|
-        dir = File.expand_path("~/.slide-em-up/#{title}")
+        dir = File.expand_path("~/.slideoff/#{title}")
         if File.exists?(dir)
           t.dir = dir
         else

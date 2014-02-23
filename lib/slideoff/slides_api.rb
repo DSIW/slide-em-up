@@ -4,7 +4,7 @@ require "rack/mime"
 require "goliath/api"
 
 
-module SlideEmUp
+module Slideoff
   class SlidesAPI < Goliath::API
     def initialize(presentation)
       @presentation = presentation

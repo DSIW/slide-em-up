@@ -1,7 +1,7 @@
 require "goliath/server"
 require "log4r"
 
-module SlideEmUp
+module Slideoff
   class Server
     DEFAULT_PORT = Goliath::Server::DEFAULT_PORT
     DEFAULT_ADDRESS = Goliath::Server::DEFAULT_ADDRESS
@@ -19,7 +19,7 @@ module SlideEmUp
     def start
       server = Goliath::Server.new(host, port)
       server.options = options
-      server.app = SlideEmUp::Routes.run(presentation, :remote_key => remote_key)
+      server.app = Slideoff::Routes.run(presentation, :remote_key => remote_key)
       server.logger = logger
 
       server.start
@@ -28,7 +28,7 @@ module SlideEmUp
     private
 
     def presentation
-      SlideEmUp::Presentation.new(dir)
+      Slideoff::Presentation.new(dir)
     end
 
     def logger

@@ -1,18 +1,18 @@
-require "./lib/slide-em-up/version.rb"
+require "./lib/slideoff/version.rb"
 
 Gem::Specification.new do |s|
-  s.name             = "slide-em-up"
-  s.version          = SlideEmUp::VERSION
+  s.name             = "slideoff"
+  s.version          = Slideoff::VERSION
   s.date             = Time.now.utc.strftime("%Y-%m-%d")
-  s.homepage         = "http://github.com/nono/slide-em-up"
+  s.homepage         = "http://github.com/DSIW/slideoff"
   s.authors          = "Bruno Michel"
   s.email            = "bruno.michel@af83.com"
-  s.description      = "Slide'em up is a presentation tool that displays markdown-formatted slides"
-  s.summary          = "Slide'em up is a presentation tool. You write some slides in markdown, choose a style and it displays it in HTML5. With a browser in full-screen, you can make amazing presentations!"
+  s.description      = "Slideoff is a presentation tool that displays markdown-formatted slides"
+  s.summary          = "Slideoff is a presentation tool. You write some slides in markdown, choose a style and it displays it in HTML5. With a browser in full-screen, you can make amazing presentations!"
   s.license          = 'MIT'
   s.extra_rdoc_files = %w(README.md)
   s.files            = Dir["MIT-LICENSE", "README.md", "Gemfile", "bin/*", "lib/**/*.rb", "themes/**/*"]
-  s.executables      = ["slide-em-up", "slide-em-up2pdf"]
+  s.executables      = ["slideoff", "slideoffpdf"]
   s.require_paths    = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.add_dependency "goliath", "=1.0.2"

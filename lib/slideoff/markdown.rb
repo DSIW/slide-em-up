@@ -3,7 +3,7 @@ require "pygments"
 require "redcarpet"
 
 
-module SlideEmUp
+module Slideoff
   class Markdown < Redcarpet::Render::HTML
     PARSER_OPTIONS = {
       :no_intra_emphasis  => true,

@@ -18,7 +18,7 @@ Requirements
 How to do your first presentation with Slide'em up?
 ---------------------------------------------------
 
-1. Install slide-em-up: `gem install slide-em-up`
+1. Install Slideoff: `gem install slideoff`
 2. Create a directory for your presentation: `mkdir foobar && cd foobar`
 3. Create a section for your slides: `mkdir main`
 4. Write some slides: `vim main/slides.md`
@@ -42,7 +42,7 @@ How to do your first presentation with Slide'em up?
          }
        }
 
-6. Launch the tool: `slide-em-up`
+6. Launch the tool: `slideoff serve`
 7. Open your browser on http://localhost:9000/
 8. Use the arrows keys to navigate between the slides
 
@@ -58,9 +58,9 @@ element.
 You can also create your own theme, for example, by copying the template:
 
 ```sh
-mkdir -p ~/.slide-em-up
-cp -r themes/template ~/.slide-em-up/my-theme
-$EDITOR ~/.slide-em-up/my-theme/README
+mkdir -p ~/.slideoff
+cp -r themes/template ~/.slideoff/my-theme
+$EDITOR ~/.slideoff/my-theme/README
 ```
 
 
@@ -111,7 +111,7 @@ like this:
 Remote Control
 --------------
 
-When your start slide-em-up in console, a message says something like:
+When your start slideoff in console, a message says something like:
 
 > Your remote key is 652df
 
@@ -123,24 +123,24 @@ presentation. For example, this command goes to the next line:
 The last part of the URL is the action and can be `next`, `prev`, `up` or
 `down`.
 
-It's also possible to force slide-em-up to use a specific remote key by
+It's also possible to force slideoff to use a specific remote key by
 setting the `APIKEY` environment variable:
 
-    APIKEY=foobar slide-em-up
+    APIKEY=foobar slideoff
 
 
 Export to PDF
 -------------
 
 You can export your presentation to PDF by installing
-[phantomjs](http://phantomjs.org/) and then run `slide-em-up2pdf`.
+[phantomjs](http://phantomjs.org/) and then run `slideoff2pdf`.
 
 
 Examples
 --------
 
-I'm using slide-em-up for my own presentations, so you can find some real
-slides powered by slide-em-up on https://github.com/nono/Presentations.
+I'm using slideoff for my own presentations, so you can find some real
+slides powered by slideoff on https://github.com/nono/Presentations.
 
 For example, you can try the presentation "Welcome to the nice world of Golang"
 on http://blog.menfin.info/Presentations/20120709_Golang_introduction/ and
@@ -152,11 +152,11 @@ Issues or Suggestions
 ---------------------
 
 Found an issue or have a suggestion? Please report it on
-[Github's issue tracker](http://github.com/nono/slide-em-up/issues).
+[Github's issue tracker](http://github.com/DSIW/slideoff/issues).
 
 If you wants to make a pull request, please check the specs before:
 
-    bundle exec spec/slide-em-up_spec.rb
+    bundle exec spec/slideoff_spec.rb
 
 
 Credits
