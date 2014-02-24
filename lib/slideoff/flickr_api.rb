@@ -18,17 +18,18 @@ module Slideoff
       "#{@message} [Code: #{@code}]"
     end
   end
+
   class FlickrAPI
     ENDPOINT = "http://api.flickr.com/services/rest/"
 
     DEFAULT_PARAMS = {
-      :api_key => ENV["FLICKR_API_KEY"],
+      :api_key => CONFIG.flickr_api_key,
       :format => :json,
       :nojsoncallback => 1
     }
 
     def initialize(params = {})
-      raise "Please specify your Flickr API key in presentation.json" unless ENV["FLICKR_API_KEY"]
+      raise "Please specify your Flickr API key in presentation.json" unless CONFIG.flickr_api_key
       @params = params
     end
 
