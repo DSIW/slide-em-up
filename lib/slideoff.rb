@@ -9,7 +9,7 @@ module Slideoff
   autoload :Utils,           "slideoff/utils"
   autoload :FlickrImage,     "slideoff/flickr_image"
   autoload :FlickrAPI,       "slideoff/flickr_api"
-  autoload :VERSION,         "slideoff/version"
 
   CONFIG = ConfigBuilder.new(Dir.pwd)
+  VERSION = "0.1"
 end
