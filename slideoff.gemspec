@@ -1,18 +1,18 @@
-require "./lib/slideoff/version.rb"
+require "./lib/slideoff.rb"
 
 Gem::Specification.new do |s|
   s.name             = "slideoff"
   s.version          = Slideoff::VERSION
   s.date             = Time.now.utc.strftime("%Y-%m-%d")
   s.homepage         = "http://github.com/DSIW/slideoff"
-  s.authors          = "Bruno Michel"
-  s.email            = "bruno.michel@af83.com"
+  s.authors          = "DSIW"
+  s.email            = "dsiw@dsiw-it.de"
   s.description      = "Slideoff is a presentation tool that displays markdown-formatted slides"
   s.summary          = "Slideoff is a presentation tool. You write some slides in markdown, choose a style and it displays it in HTML5. With a browser in full-screen, you can make amazing presentations!"
   s.license          = 'MIT'
   s.extra_rdoc_files = %w(README.md)
   s.files            = Dir["MIT-LICENSE", "README.md", "Gemfile", "bin/*", "lib/**/*.rb", "themes/**/*"]
-  s.executables      = ["slideoff", "slideoff2pdf"]
+  s.executables      = ["slideoff"]
   s.require_paths    = ["lib"]
   s.rubygems_version = %q{1.3.7}
   s.add_dependency "goliath", "=1.0.2"
