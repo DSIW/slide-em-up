@@ -1,6 +1,6 @@
-# Showoff
+# Slideoff
 
-Showoff is a presentation tool. You write some slides in markdown, choose
+Slideoff is a presentation tool. You write some slides in markdown, choose
 a style and it displays it in HTML5. With a browser in full-screen, you can
 make amazing presentations!
 
@@ -103,9 +103,8 @@ If you wants to make a pull request, please check the specs before:
 
 ## Credits
 
-Bruno Michel is the guy who made [Slide'em up](https://github.com/nono/slide-em-up).
-Scott Chacon is the guy who made [ShowOff](https://github.com/schacon/showoff).
-Slideoff is based on Slide'em up and Showoff.
+Bruno Michel is the guy who made [Slide'em up](https://github.com/nono/slide-em-up) and Scott Chacon is the guy who made
+[ShowOff](https://github.com/schacon/showoff).  Slideoff is based on Slide'em up and Showoff.
 
 Themes were picked from the internet. Thanks to:
 
