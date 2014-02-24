@@ -246,7 +246,7 @@ This is ==orange==some== __orange__super__ and _underlined_ text.
 
       sleep 2
 
-      dir = "static"
+      dir = "../static_#{File.basename(Dir.pwd)}"
       FileUtils.mkdir_p(dir)
       Dir.chdir(dir) do |dir|
         `wget -E -H -k -nH -p http://lh:#{options[:port]}/`
