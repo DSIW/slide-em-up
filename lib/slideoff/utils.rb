@@ -207,6 +207,8 @@ This is ==orange==some== __orange__super__ and _underlined_ text.
   "pygments_style": "github",
   //"duration": 20,
   //"flickr_api_key": "...",
+  //"remote_host": "...",
+  //"remote_path": "...",
   "sections": {
     "main":"Talk 2.0"
   }
@@ -222,23 +224,19 @@ This is ==orange==some== __orange__super__ and _underlined_ text.
       FileUtils.mkdir_p theme_directory
       theme_name = git_repository_url.split('/').last
       theme_path = File.join(theme_directory, theme_name)
-      puts "Cloning to #{theme_path}..."
       `git clone #{git_repository_url} #{theme_path}`
       puts "Cloned"
       puts "Please make sure that '#{theme_name}' is set as your theme in presentation.json"
     end
 
-    # Source: https://github.com/puppetlabs/showoff/blob/master/lib/showoff_utils.rb#L100
-    def github
+    def upload
       generate_static
-      `git add static`
-      sha = `git write-tree`.chomp
-      tree_sha = `git rev-parse #{sha}:static`.chomp
-      `git read-tree HEAD`  # reset staging to last-commit
-      ghp_sha = `git rev-parse gh-pages 2>/dev/null`.chomp
-      extra = ghp_sha != 'gh-pages' ? "-p #{ghp_sha}" : ''
-      commit_sha = `echo 'static presentation' | git commit-tree #{tree_sha} #{extra}`.chomp
-      `git update-ref refs/heads/gh-pages #{commit_sha}`
+      host = CONFIG.remote_host
+      path = CONFIG.remote_path
+      mkdir_commands = parents(path).map { |path| "mkdir -vp -m 755 #{path}" }
+      remote_cmd(mkdir_commands)
+      `scp -vr #{File.join(static_dir, "*")} #{host}:#{path}`
+      remote_cmd("chmod -vR o+r #{path}")
     end
 
     def generate_static(options = {})
@@ -246,9 +244,8 @@ This is ==orange==some== __orange__super__ and _underlined_ text.
 
       sleep 2
 
-      dir = "../static_#{File.basename(Dir.pwd)}"
-      FileUtils.mkdir_p(dir)
-      Dir.chdir(dir) do |dir|
+      FileUtils.mkdir_p(static_dir)
+      Dir.chdir(static_dir) do |dir|
         `wget -E -H -k -nH -p http://lh:#{options[:port]}/`
       end
 
@@ -258,6 +255,21 @@ This is ==orange==some== __orange__super__ and _underlined_ text.
 
     def serve_static(port)
       `python3 -m http.server #{port}`
+    end
+
+    private
+
+    def parents(dir)
+      splitted = dir.split(File::SEPARATOR)
+      splitted.length.times.reduce([]) { |parents, i| parents << splitted[0..i].join(File::SEPARATOR) }
+    end
+
+    def remote_cmd(cmds)
+      `ssh #{CONFIG.remote_host} "#{Array(cmds).join(';')}"`
+    end
+
+    def static_dir
+      "../static_#{File.basename(Dir.pwd)}"
     end
   end
 end
