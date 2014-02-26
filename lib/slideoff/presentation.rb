@@ -11,6 +11,12 @@ module Slideoff
         html.sub!(/<h(\d)>(.*)<\/h\1>/) { @title = $2; "" }
         @title
       end
+
+      def extract_subtitle
+        return @subtitle if @subtitle
+        html.sub!(/<h(\d)>(.*)<\/h\1>/) { @subtitle = $2; "" }
+        @subtitle
+      end
     end
 
     attr_accessor :theme, :common, :parts

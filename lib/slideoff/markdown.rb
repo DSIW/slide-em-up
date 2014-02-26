@@ -79,10 +79,10 @@ module Slideoff
           html = "<figure>"
           html << %{<img alt="#{alt}" src="#{src}"/>}
           html << "<figcaption>"
-          html << %{<img src="../images/flickr.svg" class="flickr" />}
+          html << %{<span class="flickr"></span>}
           html << %{<a href="#{page}" alt="#{author} on Flickr">#{author}</a>}
           html << %{<a href="#{license_url}" alt="#{license}">}
-          if cc_attributes.any?
+          if cc_attributes && cc_attributes.any?
             html << %{<span class="license license-cc"></span>}
             #cc_attributes.each do |cc|
               #html << %{<span class="license license-#{cc}"></span>}
@@ -104,7 +104,17 @@ module Slideoff
 
     def block_code(code, lang)
       colorized = Pygments.highlight(code, :lexer => lang || "text", :options => {:nowrap => true})
-      "<pre><code class=\"#{lang}\">#{colorized}</code></pre>"
+      code_lines = colorized.split("\n")
+      code_lines.map! do |line|
+        line = %{<span>&nbsp;</span>} if line.empty?
+        %{<code>#{line}</code>}
+      end
+      lang = "data-lang=\"#{lang}\"" if !lang.nil? && !lang.empty?
+      %{<pre #{lang}>#{code_lines.join}</pre>}
+    end
+
+    def codespan(code)
+      %{<code class="inline">#{code}</code>}
     end
 
     def table(header, body)
