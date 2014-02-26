@@ -6,23 +6,23 @@ make amazing presentations!
 
 ## Requirements
 
-* Ruby 1.9.3 or higher
-* Sass for themes with sass files
-* CoffeeScript for themes with coffee files
-* Python3 for serving static presentation
-* Wget for static site generation
-* Pygments for syntax highlighting
-* Browser for viewing presentation
+* **Ruby 1.9.3** or higher
+* **Sass** for themes with sass files
+* **CoffeeScript** for themes with coffee files
+* **Python3** for serving static presentation
+* **Wget** for static site generation
+* **Pygments** for syntax highlighting
+* **Browser** for viewing presentation
 
 
-## How to do your first presentation with Slide'em up?
+## First presentation
 
-1. Install Slideoff: `gem install slideoff`
-1. Initialize your presentation under `test` directory: `slideoff init test`
-1. Edit `presentation.json` and add your Flickr API key.
-1. Edit `main/slides.md`
-1. Serve your presentation: `slideoff serve`
-1. Open your browser on http://localhost:9000/
+1. `gem install slideoff`: Install Slideoff
+1. `slideoff init mypres`: Initialize presentation in `mypres/`
+1. `$EDITOR presentation.json` and add your Flickr API key
+1. `$EDITOR main/slides.md`: Edit your slides
+1. `slideoff serve`: Start server
+1. Open <http://localhost:9000/>
 1. Use the arrows keys to navigate between slides
 
 ## Themes
