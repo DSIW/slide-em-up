@@ -100,28 +100,28 @@ API. So it's important to generate a Flickr API key to have access to the API. Y
 
 ##Incremental view of slide
 
-If you like to display some information incrementally, you can do it! If you specify an additional slide class `incr`,
-all `li`-HTML-Elements will be displayed after some key strokes. For example:
+If you like to display some information incrementally, you can do it! If you specify an additional slide class `incr`
+and all `li`-HTML-Elements will be displayed after some key strokes. For example:
 
 ```
 !SLIDE incr
 
-* First item will be displayed after one key stroke
-* Second item will be displayed after two key strokes
-* Third item will be displayed after three key strokes
+* First item will be displayed after first key stroke
+* Second item will be displayed after second key stroke
+* Third item will be displayed after third key stroke
 ```
 
 If you like to add some opacity to visited elements, you can add `incr hover` to `!SLIDE`.
 
 If you don't like to increment only list items, you can do it more precise. You only have to add `!PAUSE` in your slide. For example:
 
+```
 !SLIDE
 
 This paragraph will be displayed first.
 
 !PAUSE
 
-```
 +++box-red shadow
 +++Box
 +++This box is displayed after one next key stroke.
