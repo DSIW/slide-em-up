@@ -17,11 +17,11 @@ make amazing presentations!
 
 ## First presentation
 
-1. `gem install slideoff`: Install Slideoff
-1. `slideoff init mypres`: Initialize presentation in `mypres/`
+1. `gem install slideoff` Install Slideoff
+1. `slideoff init mypres` Initialize presentation in `mypres/`
 1. `$EDITOR presentation.json` and add your Flickr API key
-1. `$EDITOR main/slides.md`: Edit your slides
-1. `slideoff serve`: Start server
+1. `$EDITOR main/slides.md` Edit your slides
+1. `slideoff serve` Start server
 1. Open <http://localhost:9000/>
 1. Use the arrows keys to navigate between slides
 
@@ -67,7 +67,7 @@ Example:
     2. _italics_
     3. https://github.com/
 
-Many more additional elements are added. See `main/slides.md` to get an example.
+Many more additional elements are added. See `main/slides.md` after initialization to get an example.
 
 
 ## Syntax Highlighting
@@ -84,6 +84,50 @@ like this:
     end
     ```
 
+
+##Flickr integration
+
+To integrate this [Flickr photo (22565509)](https://secure.flickr.com/photos/scoobymoo/22565509) you have to write this:
+
+```
+!F[22565509]
+```
+
+Only the ID of the photo is relevant. All other information like image source, title, author or license are requested via the Flickr
+API. So it's important to generate a Flickr API key to have access to the API. You can do it on
+<https://secure.flickr.com/services/apps/create/>. You have to specify this key in your `presentation.json`.
+
+
+##Incremental view of slide
+
+If you like to display some information incrementally, you can do it! If you specify an additional slide class `incr`,
+all `li`-HTML-Elements will be displayed after some key strokes. For example:
+
+```
+!SLIDE incr
+
+* First item will be displayed after one key stroke
+* Second item will be displayed after two key strokes
+* Third item will be displayed after three key strokes
+```
+
+If you like to add some opacity to visited elements, you can add `incr hover` to `!SLIDE`.
+
+If you don't like to increment only list items, you can do it more precise. You only have to add `!PAUSE` in your slide. For example:
+
+!SLIDE
+
+This paragraph will be displayed first.
+
+!PAUSE
+
+```
++++box-red shadow
++++Box
++++This box is displayed after one next key stroke.
+```
+
+Try it in your example presentation after initialization.
 
 ## Export to PDF
 
