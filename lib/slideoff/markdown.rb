@@ -37,7 +37,7 @@ module Slideoff
 
     def parse_box(text)
       text.gsub!(/(\+\+\+)(.*?)\n\1(.+?)\n\1(.+?)(\n|$)/m) do
-        %{<div class="box #{$2}"><p>#{$3}</p><p>#{$4}</p></div>}
+        %{<div class="box #{$2}"><div>#{$3}</div><div>#{$4}</div></div>}
       end
     end
 
