@@ -6,22 +6,33 @@ require "ostruct"
 module Slideoff
   class ConfigBuilder < OpenStruct
     DEFAULT = {
-      title: "No title",
-      theme: "shower",
-      duration: 60,
-      author: "Max Mustermann",
-      pygments_style: "colorful"
+      "title" => "No title",
+      "theme" => "shower",
+      "duration" => 60,
+      "author" => "Max Mustermann",
+      "pygments_style" => "colorful"
+    }
+    SECTION_DEFAULT = {
+      "show_chapter" => true,
+      "show_toc" => true
     }
 
     def initialize(_dir)
       infos = extract_normal_infos(_dir) || extract_infos_from_showoff(_dir) || {}
-      infos = DEFAULT.merge({dir: _dir}.merge(infos))
-      super(infos)
-      Dir.chdir(dir) do
-        self.css = Dir["**/*.css"]
-        self.js  = Dir["**/*.js"]
+
+      unless infos.empty?
+        infos = DEFAULT.merge({dir: _dir}.merge(infos))
+        infos['sections'] = infos['sections'].reduce({}) do |new_hash, (k, hash)|
+          new_hash.merge!(k => SECTION_DEFAULT.merge(hash))
+        end
+        Dir.chdir(_dir) do
+          infos['css'] = Dir["**/*.css"]
+          infos['js']  = Dir["**/*.js"]
+        end
+        ENV["FLICKR_API_KEY"] = infos['flickr_api_key']
       end
-      ENV["FLICKR_API_KEY"] = flickr_api_key
+
+      super(infos)
     end
 
     private
@@ -42,7 +53,7 @@ module Slideoff
 
     def parse_file(dir, file)
       filename = "#{dir}/#{file}.json"
-      return unless File.exists?(filename)
+      return {} unless File.exists?(filename)
       Yajl::Parser.parse(File.read filename)
     end
   end

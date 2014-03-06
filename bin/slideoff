@@ -38,9 +38,13 @@ end
 desc 'Puts your slideoff presentation into a gh-pages branch'
 long_desc 'Generates a static version of your presentation into your gh-pages branch for publishing to GitHub Pages'
 command :upload do |c|
+  c.desc 'Port on which to run'
+  c.default_value Slideoff::Server::DEFAULT_PORT
+  c.flag [:p,:port]
+
   c.action do |global_options,options,args|
     puts "Generating static content"
-    Slideoff::Utils.upload
+    Slideoff::Utils.upload(options)
     puts "Uploaded!"
   end
 end
@@ -91,9 +95,12 @@ command [:serve_static] do |c|
   c.flag [:p,:port]
 
   c.action do |global_options,options,args|
-    Dir.chdir("static") do |dir|
-      puts "Listening python server on http://0.0.0.0:#{options[:port]}"
-      Slideoff::Utils.serve_static(options[:port])
+    if File.basename(Dir.pwd) =~ /^static/
+      Slideoff::Utils.serve_static(options[:port], verbose: true)
+    else
+      Dir.chdir(Slideoff::Utils.static_dir) do |dir|
+        Slideoff::Utils.serve_static(options[:port], verbose: true)
+      end
     end
   end
 end

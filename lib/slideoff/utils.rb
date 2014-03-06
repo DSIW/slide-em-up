@@ -229,14 +229,13 @@ This is ==orange==some== __orange__super__ and _underlined_ text.
       puts "Please make sure that '#{theme_name}' is set as your theme in presentation.json"
     end
 
-    def upload
-      generate_static
-      host = CONFIG.remote_host
+    def upload(options = {})
+      generate_static(options)
       path = CONFIG.remote_path
       mkdir_commands = parents(path).map { |path| "mkdir -vp -m 755 #{path}" }
-      remote_cmd(mkdir_commands)
-      `scp -vr #{File.join(static_dir, "*")} #{host}:#{path}`
-      remote_cmd("chmod -vR o+r #{path}")
+      remote_cmd mkdir_commands
+      `scp -r #{File.join(static_dir, "*")} #{CONFIG.remote_host}:#{path}`
+      remote_cmd "chmod -vR o+r #{path}"
     end
 
     def generate_static(options = {})
@@ -244,24 +243,27 @@ This is ==orange==some== __orange__super__ and _underlined_ text.
 
       sleep 2
 
-      FileUtils.mkdir_p(static_dir)
-      Dir.chdir(static_dir) do |dir|
-        `wget -E -H -k -nH -p http://lh:#{options[:port]}/`
+      begin
+        FileUtils.mkdir_p(static_dir)
+        Dir.chdir(static_dir) do |dir|
+          `wget -E -H -k -nH -p http://lh:#{options[:port]}/`
+          File.write('robots.txt', "User-agent: *\nDisallow: /\n")
+        end
+      ensure
+        Process.kill "QUIT", pid
+        Process.wait pid
       end
-
-      Process.kill "QUIT", pid
-      Process.wait pid
     end
 
-    def serve_static(port)
+    def serve_static(port, options = {})
+      puts "Listening python server on http://0.0.0.0:#{port}" if options[:verbose]
       `python3 -m http.server #{port}`
     end
 
-    private
 
     def parents(dir)
       splitted = dir.split(File::SEPARATOR)
-      splitted.length.times.reduce([]) { |parents, i| parents << splitted[0..i].join(File::SEPARATOR) }
+      splitted.length.times.reduce([]) { |_parents, i| _parents << splitted[0..i].join(File::SEPARATOR) }
     end
 
     def remote_cmd(cmds)
