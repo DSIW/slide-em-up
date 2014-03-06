@@ -5,7 +5,11 @@ module Slideoff
     Theme   = Struct.new(:title, :dir, :css, :js)
     Section = Struct.new(:number, :title, :dir, :slides)
 
-    class Slide < Struct.new(:number, :classes, :html)
+    class Slide < Struct.new(:number, :classes, :html, :section_num)
+      def id
+        [section_num, number].join('-')
+      end
+
       def extract_title
         return @title if @title
         html.sub!(/<h(\d)>(.*)<\/h\1>/) { @title = $2; "" }
@@ -74,17 +78,19 @@ module Slideoff
     end
 
     def sections
-      @parts.map.with_index do |(dir,title),i|
-        raw = Dir["#{CONFIG.dir}/#{dir}/**/*.md"].sort.map { |f| File.read(f) }.join("\n\n")
+      @parts.map.with_index do |(dir, options), section_num|
+        raw = Dir["#{CONFIG.dir}/#{dir}/**/*.md"].sort.map do |f|
+          File.read(f)
+        end.join("\n\n")
         parts = raw.split(/!SLIDE */)
         parts.delete('')
-        slides = parts.map.with_index do |slide,j|
-          @codemap = {}
+        slide_num_diff = 2
+        slides = parts.map.with_index do |slide, slide_num|
           classes, md = slide.split("\n", 2)
           html = Markdown.render(md)
-          Slide.new(j, classes, html)
+          Slide.new(slide_num+slide_num_diff, classes, html, section_num)
         end
-        Section.new(i, title, dir, slides)
+        Section.new(section_num, options["title"], dir, slides)
       end
     end
   end
