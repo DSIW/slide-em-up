@@ -5,7 +5,7 @@ module Slideoff
   autoload :RemoteAPI,       "slideoff/remote_api"
   autoload :Routes,          "slideoff/routes"
   autoload :Server,          "slideoff/server"
-  autoload :ConfigBuilder,   "slideoff/config_builder"
+  autoload :ConfigBuilder,   File.expand_path("slideoff/config_builder", File.dirname(__FILE__))
   autoload :Utils,           "slideoff/utils"
   autoload :FlickrImage,     "slideoff/flickr_image"
   autoload :FlickrAPI,       "slideoff/flickr_api"
