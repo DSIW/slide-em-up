@@ -98,6 +98,58 @@ API. So it's important to generate a Flickr API key to have access to the API. Y
 <https://secure.flickr.com/services/apps/create/>. You have to specify this key in your `presentation.json`.
 
 
+##Boxes
+
+```
+!SLIDE
+#Boxes
+
++++
++++Normal box
++++Content
+
++++shadow
++++Box with shadow
++++Content
+
++++box-alert
++++Alert box
++++Content
+```
+
+
+##Description list
+
+```
+!SLIDE
+#Description list
+
+Elephant
+  : big animal
+House
+  : big garage
+Car
+  : big bike with four wheels
+Smartphone
+  : smart mobile phone with touch display
+```
+
+
+##Change colors
+
+Highlighting text with red background:
+
+```
+==red==text==
+```
+
+Red text:
+
+```
+__red__text__
+```
+
+
 ##Incremental view of slide
 
 If you like to display some information incrementally, you can do it! If you specify an additional slide class `incr`
@@ -113,7 +165,7 @@ and all `li`-HTML-Elements will be displayed after some key strokes. For example
 
 If you like to add some opacity to visited elements, you can add `incr hover` to `!SLIDE`.
 
-If you don't like to increment only list items, you can do it more precise. You only have to add `!PAUSE` in your slide. For example:
+If you don't like to increment list items only, you can do it more precise. You only have to add `!PAUSE` in your slide. For example:
 
 ```
 !SLIDE
@@ -130,6 +182,8 @@ This paragraph will be displayed first.
 Try it in your example presentation after initialization.
 
 ## Export to PDF
+
+Change to list mode with stroking `esc` key and use your normal printer dialog. You have to specify the correct margins and paper dimensions. I added a custom "PX 1024x640" and set width to 270mm and height to 169mm and all margins to 0.
 
 You can export your presentation to PDF by installing
 [phantomjs](http://phantomjs.org/) and then run `slideoff2pdf`.
