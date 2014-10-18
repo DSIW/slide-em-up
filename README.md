@@ -9,9 +9,11 @@ make amazing presentations!
 * **Ruby 1.9.3** or higher
 * **Sass** for themes with sass files
 * **CoffeeScript** for themes with coffee files
-* **Python3** for serving static presentation
-* **Wget** for static site generation
-* **Pygments** for syntax highlighting
+* **pygments** for syntax highlighting
+* **wget** for static site generation
+* **python3** for serving static presentation
+* **git** for installing themes and make your slides version controled
+* **scp** for uploading to remote host
 * **Browser** for viewing presentation
 
 
