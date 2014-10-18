@@ -21,5 +21,4 @@ Gem::Specification.new do |s|
   s.add_dependency "yajl-ruby", "~>1.1"
   s.add_dependency "pygments.rb", "~>0.3"
   s.add_dependency "gli", "~>2.9"
-  s.add_development_dependency "minitest", "~>2.3"
 end
