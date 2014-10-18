@@ -3,7 +3,7 @@ require "erubis"
 module Slideoff
   class Presentation
     Theme   = Struct.new(:title, :dir, :css, :js)
-    Section = Struct.new(:number, :title, :dir, :slides)
+    Section = Struct.new(:number, :title, :dir, :slides, :show_chapter, :show_toc)
 
     class Slide < Struct.new(:number, :classes, :html, :section_num)
       def id
@@ -77,13 +77,13 @@ module Slideoff
         end.join("\n\n")
         parts = raw.split(/!SLIDE */)
         parts.delete('')
-        slide_num_diff = 2
+        slide_num_diff = [options["show_chapter"], options["show_toc"]].count(true)
         slides = parts.map.with_index do |slide, slide_num|
           classes, md = slide.split("\n", 2)
           html = Markdown.render(md)
           Slide.new(slide_num+slide_num_diff, classes, html, section_num)
         end
-        Section.new(section_num, options["title"], dir, slides)
+        Section.new(section_num, options["title"], dir, slides, options["show_chapter"], options["show_toc"])
       end
     end
   end
