@@ -22,7 +22,7 @@ make amazing presentations!
 1. `gem install slideoff` Install Slideoff
 1. `slideoff init mypres` Initialize presentation in `mypres/`
 1. `$EDITOR presentation.json` and add your Flickr API key
-1. `$EDITOR main/slides.md` Edit your slides
+1. `$EDITOR main/index.md` Edit your slides
 1. `slideoff serve` Start server
 1. Open <http://localhost:9000/>
 1. Use the arrows keys to navigate between slides
