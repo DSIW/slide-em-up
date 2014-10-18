@@ -1,7 +1,7 @@
 # Encoding: utf-8
 require "pygments"
 require "redcarpet"
-
+require "cgi"
 
 module Slideoff
   class Markdown < Redcarpet::Render::HTML
@@ -67,34 +67,42 @@ module Slideoff
       text.gsub!(/!F\[(.+?)\](?:\[(.+?)\])?/) do
         id = $1
         size = $2 || :b
-        flickr_image = FlickrImage.new(id)
-        src = flickr_image.image_src #(size)
-        author = flickr_image.author
-        license = flickr_image.license["name"]
-        license_url = flickr_image.license["url"]
-        cc_attributes = flickr_image.license["cc_attributes"]
-        alt = flickr_image.title
-        page = flickr_image.page
-        if src.include? "flickr"
-          html = "<figure>"
-          html << %{<img alt="#{alt}" src="#{src}"/>}
-          html << "<figcaption>"
-          html << %{<span class="flickr"></span>}
-          html << %{<a href="#{page}" alt="#{author} on Flickr">#{author}</a>}
-          html << %{<a href="#{license_url}" alt="#{license}">}
-          if cc_attributes && cc_attributes.any?
-            html << %{<span class="license license-cc"></span>}
-            #cc_attributes.each do |cc|
-              #html << %{<span class="license license-#{cc}"></span>}
-            #end
-          end
-          html << %{</a>}
-          html << "</figcaption>"
-          html << "</figure>"
-          html
-        else
-          %{<img alt="#{alt}" src="#{src}"/>}
+        begin
+          flickr_image = FlickrImage.new(id)
+          src = flickr_image.image_src #(size)
+          author = flickr_image.author
+          license = flickr_image.license["name"]
+          license_url = flickr_image.license["url"]
+          cc_attributes = flickr_image.license["cc_attributes"]
+          alt = flickr_image.title
+          page = flickr_image.page
+        rescue Exception => e
+          title = "Specify Flickr API key!"
+          src = "http://www.placehold.it/1024x807&text=#{CGI.escape(title)}"
+          author = "No author"
+          license = "All Rights Reserved"
+          license_url = ""
+          cc_attributes = nil
+          alt = title
+          page = src
         end
+
+        html = "<figure>"
+        html << %{<img alt="#{alt}" src="#{src}"/>}
+        html << "<figcaption>"
+        html << %{<span class="flickr"></span>}
+        html << %{<a href="#{page}" alt="#{author} on Flickr">#{author}</a>}
+        html << %{<a href="#{license_url}" alt="#{license}">}
+        if cc_attributes && cc_attributes.any?
+          html << %{<span class="license license-cc"></span>}
+          #cc_attributes.each do |cc|
+            #html << %{<span class="license license-#{cc}"></span>}
+          #end
+        end
+        html << %{</a>}
+        html << "</figcaption>"
+        html << "</figure>"
+        html
       end
     end
 
