@@ -67,7 +67,7 @@ command :serve do |c|
   c.flag [:remote_key]
 
   c.action do |global_options,options,args|
-    server = Slideoff::Server.new(options).start
+    server = Slideoff::Server.new(options)
     puts "Your remote key is #{server.remote_key}\n\n"
     server.start
   end
