@@ -220,13 +220,15 @@ This is ==orange==some== __orange__super__ and _underlined_ text.
     end
 
     def install_theme(git_repository_url)
-      theme_directory = File.join(ENV['HOME'], '.slideoff')
-      FileUtils.mkdir_p theme_directory
+      slideoff_home = File.join(ENV['HOME'], '.slideoff')
+      FileUtils.mkdir_p slideoff_home
+
       theme_name = git_repository_url.split('/').last
-      theme_path = File.join(theme_directory, theme_name)
+      theme_path = File.join(slideoff_home, theme_name)
       `git clone #{git_repository_url} #{theme_path}`
-      puts "Cloned"
-      puts "Please make sure that '#{theme_name}' is set as your theme in presentation.json"
+      puts "Cloned under #{theme_path}"
+
+      puts "Please make sure that '#{theme_name}' is set in your presentation.json"
     end
 
     def upload(options = {})
