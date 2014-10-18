@@ -69,7 +69,7 @@ Example:
     2. _italics_
     3. https://github.com/
 
-Many more additional elements are added. See `main/slides.md` after initialization to get an example.
+Many more additional elements are added. See `main/index.md` after initialization to get an example.
 
 
 ## Syntax Highlighting
