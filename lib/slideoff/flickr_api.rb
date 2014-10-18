@@ -20,7 +20,7 @@ module Slideoff
   end
 
   class FlickrAPI
-    ENDPOINT = "http://api.flickr.com/services/rest/"
+    ENDPOINT = "https://api.flickr.com/services/rest/"
 
     DEFAULT_PARAMS = {
       :api_key => CONFIG.flickr_api_key,
