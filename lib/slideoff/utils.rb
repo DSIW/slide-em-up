@@ -210,7 +210,7 @@ This is ==orange==some== __orange__super__ and _underlined_ text.
   //"remote_host": "...",
   //"remote_path": "...",
   "sections": {
-    "main":"Talk 2.0"
+    "main": {"title": "Talk 2.0", "show_chapter": false, "show_toc": false}
   }
 }
           EOF
