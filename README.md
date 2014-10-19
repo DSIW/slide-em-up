@@ -4,6 +4,10 @@ Slideoff is a presentation tool. You write some slides in markdown, choose
 a style and it displays it in HTML5. With a browser in full-screen, you can
 make amazing presentations!
 
+## Demo
+
+Click here for a [demonstration](http://slideoff-test.dsiw-it.de/).
+
 ## Requirements
 
 * **Ruby 1.9.3** or higher
