@@ -422,7 +422,7 @@ PageDown / Down / right / l / j | Goto next slide
       begin
         FileUtils.mkdir_p(static_dir)
         Dir.chdir(static_dir) do |dir|
-          `wget -E -H -k -nH -p http://lh:#{options[:port]}/`
+          `wget -E -H -k -nH -p http://127.0.0.1:#{options[:port]}/`
           File.write('robots.txt', "User-agent: *\nDisallow: /\n")
         end
       ensure
