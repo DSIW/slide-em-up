@@ -415,19 +415,12 @@ PageDown / Down / right / l / j | Goto next slide
     end
 
     def generate_static(options = {})
-      pid = Process.fork { Slideoff::Server.new(options).start }
-
-      sleep 2
-
-      begin
+      fork_server(options) do
         FileUtils.mkdir_p(static_dir)
         Dir.chdir(static_dir) do |dir|
           `wget -E -H -k -nH -p http://lh:#{options[:port]}/`
           File.write('robots.txt', "User-agent: *\nDisallow: /\n")
         end
-      ensure
-        Process.kill "QUIT", pid
-        Process.wait pid
       end
     end
 
@@ -436,6 +429,21 @@ PageDown / Down / right / l / j | Goto next slide
       `python3 -m http.server #{port}`
     end
 
+    def generate_pdf_file(options = {})
+      pdf_file = "talk_#{convert_to_filename(CONFIG.title)}.pdf"
+      fork_server(options) do
+        page_width = '8000px'
+        page_height = '6000px'
+        page_margin = 0
+        source = "http://127.0.0.1:#{options[:port]}"
+        dest = pdf_file
+        `wkhtmltopdf --page-width #{page_width} --page-height #{page_height} -B #{page_margin} -R #{page_margin} -L #{page_margin} -T #{page_margin} #{source} #{dest}`
+      end
+
+      pdf_file
+    end
+
+    private
 
     def parents(dir)
       splitted = dir.split(File::SEPARATOR)
@@ -446,8 +454,24 @@ PageDown / Down / right / l / j | Goto next slide
       `ssh #{CONFIG.remote_host} "#{Array(cmds).join(';')}"`
     end
 
-    def static_dir
+    def self.static_dir
       "../static_#{File.basename(Dir.pwd)}"
+    end
+
+    def self.convert_to_filename(string)
+      string.downcase.gsub(/[^a-z0-9.-]/, '')
+    end
+
+    def self.fork_server(options)
+      pid = Process.fork { Slideoff::Server.new(options).start }
+      sleep 2
+
+      begin
+        yield
+      ensure
+        Process.kill "QUIT", pid
+        Process.wait pid
+      end
     end
   end
 end

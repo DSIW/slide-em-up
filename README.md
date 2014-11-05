@@ -18,6 +18,7 @@ Click here for a [demonstration](http://slideoff-test.dsiw-it.de/).
 * **python3** for serving static presentation
 * **git** for installing themes and make your slides version controled
 * **scp** for uploading to remote host
+* **wkhtmltopdf** for generating PDF
 * **Browser** for viewing presentation
 
 
@@ -186,13 +187,6 @@ This paragraph will be displayed first.
 ```
 
 Try it in your example presentation after initialization.
-
-## Export to PDF
-
-Change to list mode with stroking `esc` key and use your normal printer dialog. You have to specify the correct margins and paper dimensions. I added a custom "PX 1024x640" and set width to 270mm and height to 169mm and all margins to 0.
-
-You can export your presentation to PDF by installing
-[phantomjs](http://phantomjs.org/) and then run `slideoff2pdf`.
 
 
 ## Issues or Suggestions

@@ -25,11 +25,11 @@ module Slideoff
       server.start
     end
 
-    private
-
     def presentation
       Slideoff::Presentation.new(dir)
     end
+
+    private
 
     def logger
       logger = Log4r::Logger.new(self.class.name)
