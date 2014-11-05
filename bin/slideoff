@@ -78,7 +78,7 @@ desc 'Generate static version of presentation'
 long_desc 'Creates a static version of the presentation in "static" directory'
 command [:static] do |c|
   c.desc 'Port on which to run'
-  c.default_value Slideoff::Server::DEFAULT_PORT
+  c.default_value 4141
   c.flag [:p,:port]
 
   c.action do |global_options,options,args|
