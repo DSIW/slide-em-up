@@ -106,6 +106,20 @@ command [:serve_static] do |c|
 end
 
 
+desc 'Generate PDF of presentation'
+long_desc 'Generate PDF of presentation'
+command [:pdf] do |c|
+  c.desc 'Port on which to run'
+  c.default_value "4343"
+  c.flag [:p,:port]
+
+  c.action do |global_options,options,args|
+    pdf_filename = Slideoff::Utils.generate_pdf_file(options)
+    puts "Generated #{pdf_filename}."
+  end
+end
+
+
 pre do |global,command,options,args|
   # Pre logic here
   # Return true to proceed; false to abourt and not call the
