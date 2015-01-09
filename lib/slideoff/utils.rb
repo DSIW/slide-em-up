@@ -445,12 +445,12 @@ PageDown / Down / right / l / j | Goto next slide
 
     private
 
-    def parents(dir)
+    def self.parents(dir)
       splitted = dir.split(File::SEPARATOR)
       splitted.length.times.reduce([]) { |_parents, i| _parents << splitted[0..i].join(File::SEPARATOR) }
     end
 
-    def remote_cmd(cmds)
+    def self.remote_cmd(cmds)
       `ssh #{CONFIG.remote_host} "#{Array(cmds).join(';')}"`
     end
 
