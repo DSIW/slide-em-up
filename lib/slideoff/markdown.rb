@@ -32,6 +32,7 @@ module Slideoff
       parse_description(text)
       parse_flickr_image(text)
       parse_pause(text)
+      parse_interactive_steps(text)
       text
     end
 
@@ -108,6 +109,17 @@ module Slideoff
 
     def parse_pause(text)
       text.gsub!(/^!PAUSE\s*$/) { %{<p class="pause"></p>} }
+    end
+
+    def parse_interactive_steps(text)
+      text.gsub!(/!STEPS\[(.*)\]/) do
+        step_count = $1.to_i
+        html = ""
+        step_count && step_count.times do |step|
+          html << %{<div data-step="#{step}" class="step step-#{step} inactive" style="display: none;"></div>}
+        end
+        html
+      end
     end
 
     def block_code(code, lang)

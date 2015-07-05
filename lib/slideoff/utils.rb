@@ -396,6 +396,14 @@ PageDown / Down / right / l / j | Goto next slide
 }
           EOF
         end
+        File.open('script.js', 'w') do |file|
+          file.write <<-EOF
+/* Write your js */
+$(document).ready(function (e) {
+  console.log("Yeah, your are using slideoff! Have fun and be creative!");
+});
+          EOF
+        end
         puts `git init`
       end
     end

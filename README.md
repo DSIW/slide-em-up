@@ -204,6 +204,18 @@ This paragraph will be displayed first.
 
 Try it in your example presentation after initialization.
 
+You can add many states to one slide via the following snippet:
+
+```
+!SLIDE
+...
+!STEPS[n]
+```
+
+After each keystroke on right a class `step-i` is added to the `.slide` element while `i` is a number betweet 0 and
+`n-1`. So you can change your styling for these different states. For example you can translate an element via CSS.
+After these `n` keystrokes the next slide will be displayed.
+
 
 ## Issues or Suggestions
 
