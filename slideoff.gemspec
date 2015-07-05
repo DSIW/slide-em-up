@@ -4,7 +4,7 @@ Gem::Specification.new do |s|
   s.name             = "slideoff"
   s.version          = Slideoff::VERSION
   s.date             = Time.now.utc.strftime("%Y-%m-%d")
-  s.homepage         = "http://github.com/DSIW/slideoff"
+  s.homepage         = "https://dsiw.github.io/slideoff/"
   s.authors          = "DSIW"
   s.email            = "dsiw@dsiw-it.de"
   s.description      = "Slideoff is a presentation tool that displays markdown-formatted slides"
