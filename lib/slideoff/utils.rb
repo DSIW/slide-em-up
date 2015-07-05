@@ -360,7 +360,7 @@ Home                            | Goto first slide
 End                             | Goto last slide
 
 !SLIDE
-# Keybindings (1)
+# Keybindings (2)
 
 Key                             | Action
 ------------------------------- | -------------------------
