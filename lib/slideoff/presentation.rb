@@ -64,8 +64,8 @@ module Slideoff
         end
         t.title = title
         Dir.chdir(t.dir) do
-          t.css = Dir["**/*.css"]
-          t.js  = Dir["**/*.js"]
+          t.css = Dir["**/*.css"].sort
+          t.js  = Dir["**/*.js"].sort
         end
       end
     end

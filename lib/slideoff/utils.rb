@@ -415,14 +415,14 @@ PageDown / Down / right / l / j | Goto next slide
       path = CONFIG.remote_path
       mkdir_commands = parents(path).map { |path| "mkdir -vp -m 755 #{path}" }
       remote_cmd mkdir_commands
-      `scp -r #{File.join(static_dir, "*")} #{CONFIG.remote_host}:#{path}`
+      `scp -r #{File.join(CONFIG.static_dir, "*")} #{CONFIG.remote_host}:#{path}`
       remote_cmd "chmod -vR o+r #{path}"
     end
 
     def generate_static(options = {})
       fork_server(options) do
-        FileUtils.mkdir_p(static_dir)
-        Dir.chdir(static_dir) do |dir|
+        FileUtils.mkdir_p(CONFIG.static_dir)
+        Dir.chdir(CONFIG.static_dir) do |dir|
           `wget -E -H -k -nH -p http://127.0.0.1:#{options[:port]}/`
           File.write('robots.txt', "User-agent: *\nDisallow: /\n")
         end
@@ -430,8 +430,10 @@ PageDown / Down / right / l / j | Goto next slide
     end
 
     def serve_static(port, options = {})
-      puts "Listening python server on http://0.0.0.0:#{port}" if options[:verbose]
-      `python3 -m http.server #{port}`
+      Dir.chdir(CONFIG.static_dir) do
+        puts "Listening python server on http://0.0.0.0:#{port}" if options[:verbose]
+        `python3 -m http.server #{port}`
+      end
     end
 
     def generate_pdf_file(options = {})
@@ -457,10 +459,6 @@ PageDown / Down / right / l / j | Goto next slide
 
     def self.remote_cmd(cmds)
       `ssh #{CONFIG.remote_host} "#{Array(cmds).join(';')}"`
-    end
-
-    def self.static_dir
-      "public"
     end
 
     def self.convert_to_filename(string)

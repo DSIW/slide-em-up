@@ -96,13 +96,7 @@ command [:serve_static] do |c|
   c.flag [:p,:port]
 
   c.action do |global_options,options,args|
-    if File.basename(Dir.pwd) =~ /^static/
-      Slideoff::Utils.serve_static(options[:port], verbose: true)
-    else
-      Dir.chdir(Slideoff::Utils.static_dir) do |dir|
-        Slideoff::Utils.serve_static(options[:port], verbose: true)
-      end
-    end
+    Slideoff::Utils.serve_static(options[:port], verbose: true)
   end
 end
 

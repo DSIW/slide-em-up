@@ -11,7 +11,8 @@ module Slideoff
       "theme" => "shower",
       "duration" => 60,
       "author" => "Max Mustermann",
-      "pygments_style" => "colorful"
+      "pygments_style" => "colorful",
+      "static_dir" => "static"
     }
     SECTION_DEFAULT = {
       "show_chapter" => true,
@@ -27,8 +28,8 @@ module Slideoff
           new_hash.merge!(k => SECTION_DEFAULT.merge(hash))
         end
         Dir.chdir(_dir) do
-          infos['css'] = Dir["**/*.css"]
-          infos['js']  = Dir["**/*.js"]
+          infos['css'] = Dir["**/*.css"].sort - Dir["#{DEFAULT["static_dir"]}/**/*.css"]
+          infos['js']  = Dir["**/*.js"].sort - Dir["#{DEFAULT["static_dir"]}/**/*.js"]
         end
         ENV["FLICKR_API_KEY"] = infos['flickr_api_key']
       end
