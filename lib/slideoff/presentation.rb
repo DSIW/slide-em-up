@@ -43,7 +43,7 @@ module Slideoff
       Dir[     "#{CONFIG.pwd}#{asset}"].first ||
         Dir[    "#{theme.dir}#{asset}"].first ||
         Dir[   "#{common.dir}#{asset}"].first ||
-        Dir["#{CONFIG.pwd}/**#{asset}"].first
+        (Dir["#{CONFIG.pwd}/**#{asset}"] - Dir["#{CONFIG.static_dir}/**#{asset}"]).first
     end
 
     def convert_styles(dir)
