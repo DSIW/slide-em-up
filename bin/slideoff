@@ -7,7 +7,7 @@ require "slideoff"
 
 include GLI::App
 
-version "0.3.5" # Slideoff::VERSION
+version Slideoff::VERSION
 
 
 desc 'Create new slideoff presentation'
