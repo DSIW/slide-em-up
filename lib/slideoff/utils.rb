@@ -460,7 +460,7 @@ PageDown / Down / right / l / j | Goto next slide
     end
 
     def self.static_dir
-      "../static_#{File.basename(Dir.pwd)}"
+      "public"
     end
 
     def self.convert_to_filename(string)
