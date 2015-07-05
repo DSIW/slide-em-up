@@ -389,19 +389,24 @@ PageDown / Down / right / l / j | Goto next slide
 }
           EOF
         end
+        File.open('style.css', 'w') do |file|
+          file.write <<-EOF
+/* Override your theme styles */
+.slide {
+}
+          EOF
+        end
         puts `git init`
       end
     end
 
-    def install_theme(git_repository_url)
-      slideoff_home = File.join(ENV['HOME'], '.slideoff')
-      FileUtils.mkdir_p slideoff_home
-
-      theme_name = git_repository_url.split('/').last
-      theme_path = File.join(slideoff_home, theme_name)
+    def install_theme(git_repository_url, theme_name)
+      theme_name ||= git_repository_url.split('/').last.gsub(/slideoff-|theme-/, '')
+      theme_path = File.join(CONFIG.dir, 'themes', theme_name)
+      FileUtils.mkdir_p File.dirname(theme_path)
       `git clone #{git_repository_url} #{theme_path}`
-      puts "Cloned under #{theme_path}"
 
+      puts
       puts "Please make sure that '#{theme_name}' is set in your presentation.json"
     end
 

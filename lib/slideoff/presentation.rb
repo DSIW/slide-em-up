@@ -40,10 +40,10 @@ module Slideoff
     def path_for_asset(asset)
       [CONFIG, theme, common].each { |dir| convert_styles(dir) }
 
-      Dir[     "#{CONFIG.dir}#{asset}"].first ||
-        Dir[  "#{theme.dir}#{asset}"].first ||
-        Dir[ "#{common.dir}#{asset}"].first ||
-        Dir["#{CONFIG.dir}/**#{asset}"].first
+      Dir[     "#{CONFIG.pwd}#{asset}"].first ||
+        Dir[    "#{theme.dir}#{asset}"].first ||
+        Dir[   "#{common.dir}#{asset}"].first ||
+        Dir["#{CONFIG.pwd}/**#{asset}"].first
     end
 
     def convert_styles(dir)
@@ -56,7 +56,7 @@ module Slideoff
 
     def build_theme(title)
       Theme.new.tap do |t|
-        dir = File.expand_path("~/.slideoff/#{title}")
+        dir = File.expand_path("#{CONFIG.dir}/themes/#{title}")
         if File.exists?(dir)
           t.dir = dir
         else
@@ -72,7 +72,7 @@ module Slideoff
 
     def sections
       @parts.map.with_index do |(dir, options), section_num|
-        raw = Dir["#{CONFIG.dir}/#{dir}/**/*.md"].sort.map do |f|
+        raw = Dir["#{CONFIG.pwd}/#{dir}/**/*.md"].sort.map do |f|
           File.read(f)
         end.join("\n\n")
         parts = raw.split(/!SLIDE */)

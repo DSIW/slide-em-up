@@ -25,11 +25,12 @@ end
 
 desc 'Install new slideoff theme'
 arg_name 'repository_url'
-long_desc 'Installs theme under ~/.slideoff.'
+arg_name 'theme_name'
+long_desc "Installs theme under #{Slideoff::CONFIG.dir}/themes"
 command [:install_theme] do |c|
   c.action do |global_options,options,args|
     raise "repository_url is required" if args.empty?
-    Slideoff::Utils.install_theme(args[0])
+    Slideoff::Utils.install_theme(args[0], args[1])
     puts "Done."
   end
 end
