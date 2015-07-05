@@ -11,5 +11,5 @@ module Slideoff
   autoload :FlickrAPI,       "slideoff/flickr_api"
 
   CONFIG = ConfigBuilder.new(Dir.pwd)
-  VERSION = "0.3.5"
+  VERSION = "0.3"
 end
