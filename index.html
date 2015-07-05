@@ -105,11 +105,14 @@ element.</p>
 <p>Override some theme styles by using <code>style.css</code> in the presentation directory. Another way is to clone the theme via
 <code>slideoff install_theme &lt;git-url&gt;</code> and make changes there. Be sure to use the correct theme name in <code>presentation.json</code>.</p>
 
-<p>Asset lookup in this order:
-1. <code>./&lt;asset_name&gt;</code>
-1. <code>.config/slideoff/themes/&lt;theme_name&gt;/&lt;asset_name&gt;</code>
-1. <code>installation_dir/themes/&lt;theme_name&gt;/&lt;asset_name&gt;</code>
-1. <code>installation_dir/themes/common/&lt;asset_name&gt;</code></p>
+<p>Assets are looked up in this order:</p>
+
+<ol>
+<li><code>./&lt;asset_name&gt;</code></li>
+<li><code>.config/slideoff/themes/&lt;theme_name&gt;/&lt;asset_name&gt;</code></li>
+<li><code>installation_dir/themes/&lt;theme_name&gt;/&lt;asset_name&gt;</code></li>
+<li><code>installation_dir/themes/common/&lt;asset_name&gt;</code></li>
+</ol>
 
 <h2>
 <a id="markup-for-the-slides" class="anchor" href="#markup-for-the-slides" aria-hidden="true"><span class="octicon octicon-link"></span></a>Markup for the slides</h2>
@@ -254,11 +257,6 @@ This paragraph will be displayed first.
 
 <p>Found an issue or have a suggestion? Please report it on
 <a href="http://github.com/DSIW/slideoff/issues">Github's issue tracker</a>.</p>
-
-<p>If you wants to make a pull request, please check the specs before:</p>
-
-<pre><code>bundle exec spec/slideoff_spec.rb
-</code></pre>
 
 <h2>
 <a id="credits" class="anchor" href="#credits" aria-hidden="true"><span class="octicon octicon-link"></span></a>Credits</h2>
