@@ -16,59 +16,72 @@ Click here for a [demonstration](http://slideoff-test.dsiw-it.de/).
 * **pygments** for syntax highlighting
 * **wget** for static site generation
 * **python3** for serving static presentation
-* **git** for installing themes and make your slides version controled
-* **scp** for uploading to remote host
+* **git** for installing themes and make your slides version controlled
+* **scp** for uploading to remote host via secure copy
 * **wkhtmltopdf** for generating PDF
-* **Browser** for viewing presentation
+* **Browser** for viewing your presentation
+
+## Features
+
+* Write your slides in the simplest markup language `markdown`
+* Very portable presentation. You only need to upload your presentation to your web server via `scp` and open your URL.
+* Change the theme via overriding CSS in `style.css` or create a new one.
+* Install different themes
+* Export to pdf via `slideoff pdf`
+* Use the best features from web technologies. Be dynamic and interactive via Javascript, easy styling via CSS, ...
 
 
 ## First presentation
 
+1. Install ruby and some dependencies from Requirements section
 1. `gem install slideoff` Install Slideoff
 1. `slideoff init mypres` Initialize presentation in `mypres/`
 1. `$EDITOR presentation.json` and add your Flickr API key
 1. `$EDITOR main/index.md` Edit your slides
 1. `slideoff serve` Start server
 1. Open <http://localhost:9000/>
-1. Use the arrows keys to navigate between slides
+1. Use the arrow keys to navigate between slides
 
 ## Themes
 
-Several themes are available: `io2012`, `shower`, `3d_slideshow`, `reveal`,
-`html5rocks`, `CSSS`, `memories` and `modern`. To choose the theme for your
+Several themes are available: `modern`, `io2012`, `shower`, `3d_slideshow`, `reveal`,
+`html5rocks`, `CSSS` and `memories`. To choose the theme for your
 presentation, edit the `presentation.json` file and change the `"theme"`
 element.
 
-You can also create your own theme, for example, by copying the template:
+**Attention: Some of the following features are only implemented in `modern` theme.**
 
-```sh
-mkdir -p ~/.slideoff
-cp -r themes/template ~/.slideoff/my-theme
-$EDITOR ~/.slideoff/my-theme/README
-```
+Override some theme styles by using `style.css` in the presentation directory. Another way is to clone the theme via
+`slideoff install_theme <git-url>` and make changes there. Be sure to use the correct theme name in `presentation.json`.
+
+Asset lookup in this order:
+1. `./<asset_name>`
+1. `.config/slideoff/themes/<theme_name>/<asset_name>`
+1. `installation_dir/themes/<theme_name>/<asset_name>`
+1. `installation_dir/themes/common/<asset_name>`
 
 
 ## Markup for the slides
 
-This slides are writen in [Markdown](http://daringfireball.net/projects/markdown/syntax)
+This slides are written in [Markdown](http://daringfireball.net/projects/markdown/syntax)
 and `!SLIDE` is the indicator for a new slide.
 
 Example:
 
     !SLIDE
-    # Title of the first slide #
-    ## A subtitle ##
+    # Title of the first slide
+    ## A subtitle
     And some text...
 
     !SLIDE
-    # Another slide #
+    # Another slide
 
     * a
     * bullet
     * list
 
     !SLIDE
-    # Third slide #
+    # Third slide
 
     1. **bold**
     2. _italics_
@@ -90,6 +103,8 @@ like this:
       end
     end
     ```
+
+Different syntax highlighting styles exist in modern theme: `colorful`, `github`, `solarized-light`, `solarized-dark`
 
 
 ##Flickr integration
@@ -172,7 +187,7 @@ and all `li`-HTML-Elements will be displayed after some key strokes. For example
 
 If you like to add some opacity to visited elements, you can add `incr-list hover` to `!SLIDE`.
 
-If you don't like to increment list items only, you can do it more precise. You only have to add `!PAUSE` in your slide. For example:
+If you don't like to always increment list items, you can do it more precise. You only have to add `!PAUSE` to your slide. For example:
 
 ```
 !SLIDE
