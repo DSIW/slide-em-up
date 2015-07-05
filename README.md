@@ -54,7 +54,8 @@ element.
 Override some theme styles by using `style.css` in the presentation directory. Another way is to clone the theme via
 `slideoff install_theme <git-url>` and make changes there. Be sure to use the correct theme name in `presentation.json`.
 
-Asset lookup in this order:
+Assets are looked up in this order:
+
 1. `./<asset_name>`
 1. `.config/slideoff/themes/<theme_name>/<asset_name>`
 1. `installation_dir/themes/<theme_name>/<asset_name>`
@@ -208,11 +209,6 @@ Try it in your example presentation after initialization.
 
 Found an issue or have a suggestion? Please report it on
 [Github's issue tracker](http://github.com/DSIW/slideoff/issues).
-
-If you wants to make a pull request, please check the specs before:
-
-    bundle exec spec/slideoff_spec.rb
-
 
 ## Credits
 
