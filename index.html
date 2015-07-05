@@ -1,119 +1,148 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-us">
   <head>
-    <meta charset='utf-8' />
-    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
-    <meta name="description" content="Slide-em-up : Write some slides in markdown, choose a style and slide'em up displays them in HTML5." />
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Slide-em-up</title>
+    <meta charset="UTF-8">
+    <title>Slideoff by DSIW</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">Slideoff</h1>
+      <h2 class="project-tagline">Write some slides in markdown, choose a style and slideoff displays it in HTML5</h2>
+      <a href="https://github.com/DSIW/slideoff" class="btn">View on GitHub</a>
+      <a href="https://github.com/DSIW/slideoff/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/DSIW/slideoff/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/nono/slide-em-up">View on GitHub</a>
+    <section class="main-content">
+      <h1>
+<a id="slideoff" class="anchor" href="#slideoff" aria-hidden="true"><span class="octicon octicon-link"></span></a>Slideoff</h1>
 
-          <h1 id="project_title">Slide-em-up</h1>
-          <h2 id="project_tagline">Write some slides in markdown, choose a style and slide'em up displays them in HTML5.</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/nono/slide-em-up/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/nono/slide-em-up/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>Slide'em up</h1>
-
-<p>Slide'em up is a presentation tool. You write some slides in markdown, choose
+<p>Slideoff is a presentation tool. You write some slides in markdown, choose
 a style and it displays it in HTML5. With a browser in full-screen, you can
 make amazing presentations!</p>
 
-<h2>How to do your first presentation with Slide'em up?</h2>
+<h2>
+<a id="demo" class="anchor" href="#demo" aria-hidden="true"><span class="octicon octicon-link"></span></a>Demo</h2>
+
+<p>Click here for a <a href="http://slideoff-test.dsiw-it.de/">demonstration</a>.</p>
+
+<h2>
+<a id="requirements" class="anchor" href="#requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Requirements</h2>
+
+<ul>
+<li>
+<strong>Ruby 1.9.3</strong> or higher</li>
+<li>
+<strong>Sass</strong> for themes with sass files</li>
+<li>
+<strong>CoffeeScript</strong> for themes with coffee files</li>
+<li>
+<strong>pygments</strong> for syntax highlighting</li>
+<li>
+<strong>wget</strong> for static site generation</li>
+<li>
+<strong>python3</strong> for serving static presentation</li>
+<li>
+<strong>git</strong> for installing themes and make your slides version controlled</li>
+<li>
+<strong>scp</strong> for uploading to remote host via secure copy</li>
+<li>
+<strong>wkhtmltopdf</strong> for generating PDF</li>
+<li>
+<strong>Browser</strong> for viewing your presentation</li>
+</ul>
+
+<h2>
+<a id="features" class="anchor" href="#features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Features</h2>
+
+<ul>
+<li>Write your slides in the simplest markup language <code>markdown</code>
+</li>
+<li>Very portable presentation. You only need to upload your presentation to your web server via <code>scp</code> and open your URL.</li>
+<li>Change the theme via overriding CSS in <code>style.css</code> or create a new one.</li>
+<li>Install different themes</li>
+<li>Export to pdf via <code>slideoff pdf</code>
+</li>
+<li>Use the best features from web technologies. Be dynamic and interactive via Javascript, easy styling via CSS, ...</li>
+</ul>
+
+<h2>
+<a id="first-presentation" class="anchor" href="#first-presentation" aria-hidden="true"><span class="octicon octicon-link"></span></a>First presentation</h2>
 
 <ol>
-<li>Install slide-em-up: <code>gem install slide-em-up</code>
-</li>
-<li>Create a directory for your presentation: <code>mkdir foobar &amp;&amp; cd foobar</code>
-</li>
-<li>Create a section for your slides: <code>mkdir main</code>
+<li>Install ruby and some dependencies from Requirements section</li>
+<li>
+<code>gem install slideoff</code> Install Slideoff</li>
+<li>
+<code>slideoff init mypres</code> Initialize presentation in <code>mypres/</code>
 </li>
 <li>
-<p>Write some slides: <code>vim main/slides.md</code></p>
-
-<p>!SLIDE
-   # My First slide #
-   It's awesome</p>
-
-<p>!SLIDE
-   # My second slide #
-   This rocks too!</p>
-</li>
+<code>$EDITOR presentation.json</code> and add your Flickr API key</li>
 <li>
-<p>Write the <code>presentation.json</code> file with the metadata:</p>
-
-<p>{
-     "title": "My first presentation",
-     "theme": "CSSS",
-     "duration": 20,
-     "sections": {
-         "main": "Title of my main section"
-     }
-   }</p>
+<code>$EDITOR main/index.md</code> Edit your slides</li>
+<li>
+<code>slideoff serve</code> Start server</li>
+<li>Open <a href="http://localhost:9000/">http://localhost:9000/</a>
 </li>
-<li><p>Launch the tool: <code>slide-em-up</code></p></li>
-<li><p>Open your browser on http://localhost:9000/</p></li>
-<li><p>Use the arrows keys to navigate between the slides</p></li>
-</ol><h2>Themes</h2>
+<li>Use the arrow keys to navigate between slides</li>
+</ol>
 
-<p>Several themes are available: <code>io2012</code>, <code>shower</code>, <code>3d_slideshow</code>, <code>reveal</code>,
+<h2>
+<a id="themes" class="anchor" href="#themes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Themes</h2>
+
+<p>Several themes are available: <code>modern</code>, <code>io2012</code>, <code>shower</code>, <code>3d_slideshow</code>, <code>reveal</code>,
 <code>html5rocks</code>, <code>CSSS</code> and <code>memories</code>. To choose the theme for your
 presentation, edit the <code>presentation.json</code> file and change the <code>"theme"</code>
 element.</p>
 
-<p>You can also create your own theme, for example, by copying the template:</p>
+<p><strong>Attention: Some of the following features are only implemented in <code>modern</code> theme.</strong></p>
 
-<div class="highlight"><pre>mkdir -p ~/.slide-em-up
-cp -r themes/template ~/.slide-em-up/my-theme
-<span class="nv">$EDITOR</span> ~/.slide-em-up/my-theme/README
-</pre></div>
+<p>Override some theme styles by using <code>style.css</code> in the presentation directory. Another way is to clone the theme via
+<code>slideoff install_theme &lt;git-url&gt;</code> and make changes there. Be sure to use the correct theme name in <code>presentation.json</code>.</p>
 
-<h2>Markup for the slides</h2>
+<p>Asset lookup in this order:
+1. <code>./&lt;asset_name&gt;</code>
+1. <code>.config/slideoff/themes/&lt;theme_name&gt;/&lt;asset_name&gt;</code>
+1. <code>installation_dir/themes/&lt;theme_name&gt;/&lt;asset_name&gt;</code>
+1. <code>installation_dir/themes/common/&lt;asset_name&gt;</code></p>
 
-<p>This slides are writen in <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>
+<h2>
+<a id="markup-for-the-slides" class="anchor" href="#markup-for-the-slides" aria-hidden="true"><span class="octicon octicon-link"></span></a>Markup for the slides</h2>
+
+<p>This slides are written in <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>
 and <code>!SLIDE</code> is the indicator for a new slide.</p>
 
 <p>Example:</p>
 
 <pre><code>!SLIDE
-# Title of the first slide #
-## A subtitle ##
+# Title of the first slide
+## A subtitle
 And some text...
 
 !SLIDE
-# Another slide #
+# Another slide
 
 * a
 * bullet
 * list
 
 !SLIDE
-# Third slide #
+# Third slide
 
 1. **bold**
 2. _italics_
 3. https://github.com/
 </code></pre>
 
-<h2>Syntax Highlighting</h2>
+<p>Many more additional elements are added. See <code>main/index.md</code> after initialization to get an example.</p>
+
+<h2>
+<a id="syntax-highlighting" class="anchor" href="#syntax-highlighting" aria-hidden="true"><span class="octicon octicon-link"></span></a>Syntax Highlighting</h2>
 
 <p>To highlight some code in your slides, you have to install
 <a href="http://pygments.org/">pygments</a>. Then, surround your code with backticks
@@ -128,59 +157,114 @@ end
 ```
 </code></pre>
 
-<h2>Remote Control</h2>
+<p>Different syntax highlighting styles exist in modern theme: <code>colorful</code>, <code>github</code>, <code>solarized-light</code>, <code>solarized-dark</code></p>
 
-<p>When your start slide-em-up in console, a message says something like:</p>
+<h2>
+<a id="flickr-integration" class="anchor" href="#flickr-integration" aria-hidden="true"><span class="octicon octicon-link"></span></a>Flickr integration</h2>
 
-<blockquote>
-<p>Your remote key is 652df</p>
-</blockquote>
+<p>To integrate this <a href="https://secure.flickr.com/photos/scoobymoo/22565509">Flickr photo (22565509)</a> you have to write this:</p>
 
-<p>This remote key can be used to send actions to browsers that display the
-presentation. For example, this command goes to the next line:</p>
-
-<pre><code>curl http://localhost:9000/remote/652df/next
+<pre><code>!F[22565509]
 </code></pre>
 
-<p>The last part of the URL is the action and can be <code>next</code>, <code>prev</code>, <code>up</code> or
-<code>down</code>.</p>
+<p>Only the ID of the photo is relevant. All other information like image source, title, author or license are requested via the Flickr
+API. So it's important to generate a Flickr API key to have access to the API. You can do it on
+<a href="https://secure.flickr.com/services/apps/create/">https://secure.flickr.com/services/apps/create/</a>. You have to specify this key in your <code>presentation.json</code>.</p>
 
-<p>It's also possible to force slide-em-up to use a specific remote key by
-setting the <code>APIKEY</code> environment variable:</p>
+<h2>
+<a id="boxes" class="anchor" href="#boxes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Boxes</h2>
 
-<pre><code>APIKEY=foobar slide-em-up
+<pre><code>!SLIDE
+#Boxes
+
++++
++++Normal box
++++Content
+
++++shadow
++++Box with shadow
++++Content
+
++++box-alert
++++Alert box
++++Content
 </code></pre>
 
-<h2>Export to PDF</h2>
+<h2>
+<a id="description-list" class="anchor" href="#description-list" aria-hidden="true"><span class="octicon octicon-link"></span></a>Description list</h2>
 
-<p>You can export your presentation to PDF by installing
-<a href="http://phantomjs.org/">phantomjs</a> and then run <code>slide-em-up2pdf</code>.</p>
+<pre><code>!SLIDE
+#Description list
 
-<h2>Examples</h2>
+Elephant
+  : big animal
+House
+  : big garage
+Car
+  : big bike with four wheels
+Smartphone
+  : smart mobile phone with touch display
+</code></pre>
 
-<p>I'm using slide-em-up for my own presentations, so you can find some real
-slides powered by slide-em-up on <a href="https://github.com/nono/Presentations">https://github.com/nono/Presentations</a>.</p>
+<h2>
+<a id="change-colors" class="anchor" href="#change-colors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Change colors</h2>
 
-<p>For example, you can try the presentation "Welcome to the nice world of Golang"
-on <a href="http://blog.menfin.info/Presentations/20120709_Golang_introduction/">http://blog.menfin.info/Presentations/20120709_Golang_introduction/</a> and
-see the sources of it on
-<a href="https://github.com/nono/Presentations/tree/master/20120709_Golang_introduction">https://github.com/nono/Presentations/tree/master/20120709_Golang_introduction</a>.</p>
+<p>Highlighting text with red background:</p>
 
-<h2>Issues or Suggestions</h2>
+<pre><code>==red==text==
+</code></pre>
+
+<p>Red text:</p>
+
+<pre><code>__red__text__
+</code></pre>
+
+<h2>
+<a id="incremental-view-of-slide" class="anchor" href="#incremental-view-of-slide" aria-hidden="true"><span class="octicon octicon-link"></span></a>Incremental view of slide</h2>
+
+<p>If you like to display some information incrementally, you can do it! If you specify an additional slide class <code>incr-list</code>
+and all <code>li</code>-HTML-Elements will be displayed after some key strokes. For example:</p>
+
+<pre><code>!SLIDE incr-list
+
+* First item will be displayed after first key stroke
+* Second item will be displayed after second key stroke
+* Third item will be displayed after third key stroke
+</code></pre>
+
+<p>If you like to add some opacity to visited elements, you can add <code>incr-list hover</code> to <code>!SLIDE</code>.</p>
+
+<p>If you don't like to always increment list items, you can do it more precise. You only have to add <code>!PAUSE</code> to your slide. For example:</p>
+
+<pre><code>!SLIDE
+
+This paragraph will be displayed first.
+
+!PAUSE
+
++++box-red shadow
++++Box
++++This box is displayed after one next key stroke.
+</code></pre>
+
+<p>Try it in your example presentation after initialization.</p>
+
+<h2>
+<a id="issues-or-suggestions" class="anchor" href="#issues-or-suggestions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Issues or Suggestions</h2>
 
 <p>Found an issue or have a suggestion? Please report it on
-<a href="http://github.com/nono/slide-em-up/issues">Github's issue tracker</a>.</p>
+<a href="http://github.com/DSIW/slideoff/issues">Github's issue tracker</a>.</p>
 
 <p>If you wants to make a pull request, please check the specs before:</p>
 
-<pre><code>bundle exec spec/slide-em-up_spec.rb
+<pre><code>bundle exec spec/slideoff_spec.rb
 </code></pre>
 
-<h2>Credits</h2>
+<h2>
+<a id="credits" class="anchor" href="#credits" aria-hidden="true"><span class="octicon octicon-link"></span></a>Credits</h2>
 
-<p>Scott Chacon is the guy who made <a href="https://github.com/schacon/showoff">ShowOff</a>.
-Slide'em up is only a copy of ShowOff with multiple themes and sinatra
-replaced by Goliath.</p>
+<p>Bruno Michel is the guy who made <a href="https://github.com/nono/slide-em-up">Slide'em up</a> and Scott Chacon is the guy who made
+<a href="https://github.com/schacon/showoff">ShowOff</a>.  Slideoff is based on Slide'em up and Showoff.</p>
 
 <p>Themes were picked from the internet. Thanks to:</p>
 
@@ -190,20 +274,20 @@ replaced by Goliath.</p>
 <li>Vadim Makeev for shower</li>
 <li>Lea Verou for CSSS (and its modified version, memories)</li>
 <li>Google for io2012</li>
-</ul><p>♡2011 by Bruno Michel. Copying is an act of love. Please copy and share.
+</ul>
+
+<p>♡2014 by DSIW. Copying is an act of love. Please copy and share.
 Released under the MIT license</p>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Slide-em-up maintained by <a href="https://github.com/nono">nono</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/DSIW/slideoff">Slideoff</a> is maintained by <a href="https://github.com/DSIW">DSIW</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
 
-    
+    </section>
 
+  
   </body>
 </html>
+
