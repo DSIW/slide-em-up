@@ -421,7 +421,8 @@ PageDown / Down / right / l / j | Goto next slide
 
     def generate_static(options = {})
       fork_server(options) do
-        FileUtils.mkdir_p(CONFIG.static_dir)
+        FileUtils.mkdir_p(CONFIG.static_dir, verbose: true)
+        FileUtils.rm_rf(Dir[File.join(CONFIG.static_dir, '*')], verbose: true)
         Dir.chdir(CONFIG.static_dir) do |dir|
           `wget -E -H -k -nH -p http://127.0.0.1:#{options[:port]}/`
           File.write('robots.txt', "User-agent: *\nDisallow: /\n")
