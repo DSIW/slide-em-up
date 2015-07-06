@@ -43,7 +43,7 @@ module Slideoff
       Dir[     "#{CONFIG.pwd}#{asset}"].first ||
         Dir[    "#{theme.dir}#{asset}"].first ||
         Dir[   "#{common.dir}#{asset}"].first ||
-        (Dir["#{CONFIG.pwd}/**#{asset}"] - Dir["#{CONFIG.static_dir}/**#{asset}"]).first
+        lookup_recursive_without_static(asset).first
     end
 
     def convert_styles(dir)
@@ -53,6 +53,12 @@ module Slideoff
     end
 
   protected
+
+    def lookup_recursive_without_static(path)
+      found_paths = Dir["#{File.absolute_path(CONFIG.pwd)}/**#{path}"]
+      found_static_paths = Dir["#{File.absolute_path(CONFIG.static_dir)}/**#{path}"]
+      found_paths - found_static_paths
+    end
 
     def build_theme(title)
       Theme.new.tap do |t|
