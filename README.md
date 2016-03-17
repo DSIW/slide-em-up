@@ -108,6 +108,26 @@ like this:
 Different syntax highlighting styles exist in modern theme: `colorful`, `github`, `solarized-light`, `solarized-dark`
 
 
+## Formulas (modern theme)
+
+[MathJax](https://www.mathjax.org) is integrated and you can write your formulas in [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Mathematics). Example:
+
+    <p>
+    Pythagoras as inline equation: \( a^2 + b^2 = c^2 \)
+    </p>
+
+    <p>
+    Fibonacci as displayed equation:
+    $$
+      F_n =
+      \begin{cases}
+      n & \quad \text{if } n \leq 1 \\
+      F_{i-1} + F_{i-2} & \quad \text{otherwise} \\
+      \end{cases}
+    $$
+    </p>
+
+
 ##Flickr integration
 
 To integrate this [Flickr photo (22565509)](https://secure.flickr.com/photos/scoobymoo/22565509) you have to write this:

@@ -341,6 +341,26 @@ $(function () {
 
 ![Image](https://farm4.staticflickr.com/3254/3034540524_2412428602_b.jpg)
 
+
+!SLIDE
+# Formulas
+
+<p>
+Pythagoras as inline equation: \\( a^2 + b^2 = c^2 \\)
+</p>
+
+<p>
+Fibonacci as displayed equation:
+$$
+  F_n =
+  \\begin{cases}
+  n & \quad \\text{if } n \\leq 1 \\\\
+  F_{i-1} + F_{i-2} & \\quad \\text{otherwise} \\\\
+  \\end{cases}
+$$
+</p>
+
+
 !SLIDE
 # Clickbindings
 
