@@ -128,7 +128,7 @@ Different syntax highlighting styles exist in modern theme: `colorful`, `github`
     </p>
 
 
-##Flickr integration
+##Flickr integration (modern theme)
 
 To integrate this [Flickr photo (22565509)](https://secure.flickr.com/photos/scoobymoo/22565509) you have to write this:
 
@@ -141,7 +141,7 @@ API. So it's important to generate a Flickr API key to have access to the API. Y
 <https://secure.flickr.com/services/apps/create/>. You have to specify this key in your `presentation.json`.
 
 
-##Boxes
+##Boxes (modern theme)
 
 ```
 !SLIDE
@@ -161,7 +161,7 @@ API. So it's important to generate a Flickr API key to have access to the API. Y
 ```
 
 
-##Description list
+##Description list (modern theme)
 
 ```
 !SLIDE
@@ -193,7 +193,7 @@ __red__text__
 ```
 
 
-##Incremental view of slide
+##Incremental view of slide (modern theme)
 
 If you like to display some information incrementally, you can do it! If you specify an additional slide class `incr-list`
 and all `li`-HTML-Elements will be displayed after some key strokes. For example:
