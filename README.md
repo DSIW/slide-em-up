@@ -16,14 +16,14 @@ Click here for a [demonstration](http://slideoff-test.dsiw-it.de/).
 * **pygments** for syntax highlighting
 * **wget** for static site generation
 * **python3** for serving static presentation
-* **git** for installing themes and make your slides version controlled
-* **scp** for uploading to remote host via secure copy
+* **git** for installing themes and makes your slides version controlled
+* **scp** for uploading to remote host via SSH
 * **wkhtmltopdf** for generating PDF
 * **Browser** for viewing your presentation
 
 ## Features
 
-* Write your slides in the simplest markup language `markdown`
+* Write your slides in the simplest markup language: `markdown`
 * Very portable presentation. You only need to upload your presentation to your web server via `scp` and open your URL.
 * Change the theme via overriding CSS in `style.css` or create a new one.
 * Install different themes
@@ -64,7 +64,7 @@ Assets are looked up in this order:
 
 ## Markup for the slides
 
-This slides are written in [Markdown](http://daringfireball.net/projects/markdown/syntax)
+These slides are written in [Markdown](http://daringfireball.net/projects/markdown/syntax)
 and `!SLIDE` is the indicator for a new slide.
 
 Example:
@@ -110,7 +110,7 @@ Different syntax highlighting styles exist in modern theme: `colorful`, `github`
 
 ## Formulas (modern theme)
 
-[MathJax](https://www.mathjax.org) is integrated and you can write your formulas in [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Mathematics). Example:
+[MathJax](https://www.mathjax.org) is integrated and you can write your formulas in [LaTeX](https://en.wikibooks.org/wiki/LaTeX/Mathematics). You need to wrap it with `<p>`. Example:
 
     <p>
     Pythagoras as inline equation: \( a^2 + b^2 = c^2 \)
@@ -128,20 +128,19 @@ Different syntax highlighting styles exist in modern theme: `colorful`, `github`
     </p>
 
 
-##Flickr integration (modern theme)
+## Flickr integration (modern theme)
 
-To integrate this [Flickr photo (22565509)](https://secure.flickr.com/photos/scoobymoo/22565509) you have to write this:
+Use Flickr photos like this one [22565509](https://secure.flickr.com/photos/scoobymoo/22565509):
 
 ```
 !F[22565509]
 ```
 
-Only the ID of the photo is relevant. All other information like image source, title, author or license are requested via the Flickr
-API. So it's important to generate a Flickr API key to have access to the API. You can do it on
-<https://secure.flickr.com/services/apps/create/>. You have to specify this key in your `presentation.json`.
+Only the ID of the photo is relevant. All other information like image source, title, author or license are requested via the Flickr API. So it's important to generate a Flickr API key (
+<https://secure.flickr.com/services/apps/create/>). You have to specify this key in your `presentation.json`.
 
 
-##Boxes (modern theme)
+## Boxes (modern theme)
 
 ```
 !SLIDE
@@ -161,7 +160,7 @@ API. So it's important to generate a Flickr API key to have access to the API. Y
 ```
 
 
-##Description list (modern theme)
+## Description list (modern theme)
 
 ```
 !SLIDE
@@ -178,25 +177,25 @@ Smartphone
 ```
 
 
-##Change colors
+## Colors
 
-Highlighting text with red background:
+Highlight text with red background:
 
 ```
 ==red==text==
 ```
 
-Red text:
+or red text:
 
 ```
 __red__text__
 ```
 
 
-##Incremental view of slide (modern theme)
+## Incremental view of slide (modern theme)
 
 If you like to display some information incrementally, you can do it! If you specify an additional slide class `incr-list`
-and all `li`-HTML-Elements will be displayed after some key strokes. For example:
+and all `li`-HTML-Elements will be displayed after some additional key strokes. For example:
 
 ```
 !SLIDE incr-list
@@ -208,7 +207,7 @@ and all `li`-HTML-Elements will be displayed after some key strokes. For example
 
 If you like to add some opacity to visited elements, you can add `incr-list hover` to `!SLIDE`.
 
-If you don't like to always increment list items, you can do it more precise. You only have to add `!PAUSE` to your slide. For example:
+You can incrementally show every element on the slide. You only have to add `!PAUSE` to your slide. For example:
 
 ```
 !SLIDE
@@ -232,7 +231,7 @@ You can add many states to one slide via the following snippet:
 !STEPS[n]
 ```
 
-After each keystroke on right a class `step-i` is added to the `.slide` element while `i` is a number betweet 0 and
+After each keystroke a class `step-i` is added to the `.slide` element while `i` is a number betweet 0 and
 `n-1`. So you can change your styling for these different states. For example you can translate an element via CSS.
 After these `n` keystrokes the next slide will be displayed.
 
